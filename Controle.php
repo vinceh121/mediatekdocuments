@@ -47,7 +47,7 @@ class Controle{
         }else{
             $result = $this->accessBDD->selectOne($table, $id);
         }
-        if ($result == null || $result == false){
+        if (gettype($result) != "array" && ($result == false || $result == null)){
             $this->reponse(400, "requete invalide");
         }else{	
             $this->reponse(200, "OK", $result);
