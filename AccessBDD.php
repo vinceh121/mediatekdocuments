@@ -39,10 +39,16 @@ class AccessBDD {
                 case "revue" :
                     return $this->selectAllRevues();
                 case "exemplaire" :
-                    return $this->selectAllExemplairesRevue();
+                    return $this->selectExemplairesRevue();
+                case "genre" :
+                case "public" :
+                case "rayon" :
+                case "etat" :
+                    // select portant sur une table contenant juste id et libelle
+                    return $this->selectTableSimple($table);
                 default:
-                    // cas d'un select portant sur une table simple, avec tri sur le libellé
-                    return $this->selectAllTableSimple($table);
+                    // select portant sur une table, sans condition
+                    return $this->selectTable($table);
             }			
         }else{
             return null;
@@ -50,22 +56,19 @@ class AccessBDD {
     }
 
     /**
-     * récupération d'une ligne d'une table
+     * récupération des lignes concernées
      * @param string $table nom de la table
-     * @param string $id id de la ligne à récupérer
-     * @return ligne de la requete correspondant à l'id
+     * @param array $champs nom et valeur de chaque champs de recherche
+     * @return lignes répondant aux critères de recherches
      */	
-    public function selectOne($table, $id){
-        if($this->conn != null){
+    public function select($table, $champs){
+        if($this->conn != null && $champs != null){
             switch($table){
                 case "exemplaire" :
-                    return $this->selectAllExemplairesRevue($id);
-                default:
-                    // cas d'un select portant sur une table simple			
-                    $param = array(
-                        "id" => $id
-                    );
-                    return $this->conn->query("select * from $table where id=:id;", $param);					
+                    return $this->selectExemplairesRevue($champs['id']);
+                default:                    
+                    // cas d'un select sur une table avec recherche sur des champs
+                    return $this->selectTableOnConditons($table, $champs);					
             }				
         }else{
                 return null;
@@ -73,13 +76,40 @@ class AccessBDD {
     }
 
     /**
-     * récupération de toutes les lignes de d'une table simple (sans jointure) avec tri sur le libellé
-     * @param type $table
-     * @return lignes de la requete
+     * récupération de toutes les lignes d'une table simple (qui contient juste id et libelle)
+     * @param string $table
+     * @return lignes triées sur lebelle
      */
-    public function selectAllTableSimple($table){
+    public function selectTableSimple($table){
         $req = "select * from $table order by libelle;";		
-        return $this->conn->query($req);		
+        return $this->conn->query($req);	    
+    }
+    
+    /**
+     * récupération de toutes les lignes d'une table
+     * @param string $table
+     * @return toutes les lignes de la table
+     */
+    public function selectTable($table){
+        $req = "select * from $table;";		
+        return $this->conn->query($req);        
+    }
+    
+    /**
+     * récupération des lignes d'une table dont les champs concernés correspondent aux valeurs
+     * @param type $table
+     * @param type $champs
+     * @return type
+     */
+    public function selectTableOnConditons($table, $champs){
+        // construction de la requête
+        $requete = "select * from $table where ";
+        foreach ($champs as $key => $value){
+            $requete .= "$key=:$key and";
+        }
+        // (enlève le dernier and)
+        $requete = substr($requete, 0, strlen($requete)-3);								
+        return $this->conn->query($requete, $champs);		
     }
 
     /**
@@ -132,7 +162,7 @@ class AccessBDD {
      * @param string $id id de la revue
      * @return lignes de la requete
      */
-    public function selectAllExemplairesRevue($id){
+    public function selectExemplairesRevue($id){
         $param = array(
                 "id" => $id
         );

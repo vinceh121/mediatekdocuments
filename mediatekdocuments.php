@@ -18,21 +18,21 @@ if(!isset($_SERVER['PHP_AUTH_USER']) || (isset($_SERVER['PHP_AUTH_USER']) &&
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING) ??
           filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
     // nom et valeur des champs au format json
-    $contenu = filter_input(INPUT_GET, 'contenu', FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES) ??
-               filter_input(INPUT_POST, 'contenu', FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
-    if($contenu != ""){
-        $contenu = json_decode($contenu, true);
+    $champs = filter_input(INPUT_GET, 'champs', FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES) ??
+               filter_input(INPUT_POST, 'champs', FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+    if($champs != ""){
+        $champs = json_decode($champs, true);
     }
 
     // traitement suivant le verbe HTTP utilisé
     if($_SERVER['REQUEST_METHOD'] === 'GET'){
-        $controle->get($table, $id);
+        $controle->get($table, $champs);
     }else if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $controle->post($table, $contenu);
+        $controle->post($table, $champs);
     }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
-        $controle->put($table, $id, $contenu);
+        $controle->put($table, $id, $champs);
     }else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
-        $controle->delete($table, $contenu);
+        $controle->delete($table, $champs);
     }
 
 }
