@@ -137,7 +137,8 @@ namespace MediaTekDocuments.dal
         /// <returns>Liste d'objets Exemplaire</returns>
         public List<Exemplaire> GetExemplairesRevue(string idDocument)
         {
-            List<Exemplaire> lesExemplaires = TraitementRecup<Exemplaire>(GET, "exemplaire/" + idDocument);
+            String jsonIdDocument = convertToJson("id", idDocument);
+            List<Exemplaire> lesExemplaires = TraitementRecup<Exemplaire>(GET, "exemplaire/" + jsonIdDocument);
             return lesExemplaires;
         }
 
@@ -196,6 +197,19 @@ namespace MediaTekDocuments.dal
                 Environment.Exit(0);
             }
             return liste;
+        }
+
+        /// <summary>
+        /// Convertit en json un couple nom/valeur
+        /// </summary>
+        /// <param name="nom"></param>
+        /// <param name="valeur"></param>
+        /// <returns>couple au format json</returns>
+        private String convertToJson(Object nom, Object valeur)
+        {
+            Dictionary<Object, Object> dictionary = new Dictionary<Object, Object>();
+            dictionary.Add(nom, valeur);
+            return JsonConvert.SerializeObject(dictionary);
         }
 
         /// <summary>
