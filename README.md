@@ -1,4 +1,6 @@
 # rest_mediatekdocuments
+<B>Attention, si vous utilisez une version de PHP >= à 8.1, alors, dans le fichier mediatekdocuments.php, vous devez remplacer tous les "FILTER_SANITIZE_STRING" par "FILTER_SANITIZE_FULL_SPECIAL_CHARS".</B>
+
 Cette API est utilisée par l'application MediatekDocuments écrite en C# et récupérable dans le dépôt suivant :<br>
 https://github.com/CNED-SLAM/MediaTekDocuments<br>
 Le readme présente l'application et aussi le rôle de l'API.
