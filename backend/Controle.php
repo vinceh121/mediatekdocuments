@@ -1,20 +1,22 @@
 <?php
-include_once("AccessBDD.php");
+include_once ("AccessBDD.php");
 
 /**
  * Contrôleur : reçoit et traite les demandes du point d'entrée
  */
-class Controle{
-	
+class Controle
+{
+
     private $accessBDD;
 
     /**
      * Constructeur : récupération de l'instance d'accès à la BDD
      */
-    public function __construct(){
-        try{
+    public function __construct()
+    {
+        try {
             $this->accessBDD = new AccessBDD();
-        }catch(Exception $e){
+        } catch (Exception $e) {
             $this->reponse(500, "erreur serveur");
             die();
         }
@@ -22,11 +24,16 @@ class Controle{
 
     /**
      * réponse renvoyée (affichée) au client au format json
-     * @param int $code code standard HTTP
-     * @param string $message message correspondant au code
-     * @param array $result résultat de la demande 
+     *
+     * @param int $code
+     *            code standard HTTP
+     * @param string $message
+     *            message correspondant au code
+     * @param array $result
+     *            résultat de la demande
      */
-    private function reponse($code, $message, $result=""){
+    private function reponse($code, $message, $result = "")
+    {
         $retour = array(
             'code' => $code,
             'message' => $message,
@@ -37,70 +44,88 @@ class Controle{
 
     /**
      * requete arrivée en GET (select)
-     * @param string $table nom de la table
-     * @param type $champs nom et valeur des champs de recherche
+     *
+     * @param string $table
+     *            nom de la table
+     * @param array $champs
+     *            nom et valeur des champs de recherche
      */
-    public function get($table, $champs){
+    public function get($table, $champs)
+    {
         $result = null;
-        if ($champs==""){
+        if ($champs == "") {
             $result = $this->accessBDD->selectAll($table);
-        }else{
+        } else {
             $result = $this->accessBDD->select($table, $champs);
         }
-        if (gettype($result) != "array" && ($result == false || $result == null)){
+        if (gettype($result) != "array" && ($result == false || $result == null)) {
             $this->reponse(400, "requete invalide");
-        }else{	
+        } else {
             $this->reponse(200, "OK", $result);
         }
     }
 
     /**
      * requete arrivée en DELETE
-     * @param string $table nom de la table
-     * @param array $champs nom et valeur des champs
+     *
+     * @param string $table
+     *            nom de la table
+     * @param array $champs
+     *            nom et valeur des champs
      */
-    public function delete($table, $champs){
-        $result = $this->accessBDD->delete($table, $champs);	
-        if ($result == null || $result == false){
+    public function delete($table, $champs)
+    {
+        $result = $this->accessBDD->delete($table, $champs);
+        if ($result == null || $result == false) {
             $this->reponse(400, "requete invalide");
-        }else{	
+        } else {
             $this->reponse(200, "OK");
         }
     }
 
     /**
      * requete arrivée en POST (insert)
-     * @param string $table nom de la table
-     * @param array $champs nom et valeur des champs
+     *
+     * @param string $table
+     *            nom de la table
+     * @param array $champs
+     *            nom et valeur des champs
      */
-    public function post($table, $champs){
-        $result = $this->accessBDD->insertOne($table, $champs);	
-        if ($result == null || $result == false){
+    public function post($table, $champs)
+    {
+        $result = $this->accessBDD->insertOne($table, $champs);
+        if ($result == null || $result == false) {
             $this->reponse(400, "requete invalide");
-        }else{	
+        } else {
             $this->reponse(200, "OK");
         }
     }
 
     /**
      * requete arrivée en PUT (update)
-     * @param string $table nom de la table
-     * @param string $id valeur de l'id
-     * @param array $champs nom et valeur des champs
+     *
+     * @param string $table
+     *            nom de la table
+     * @param string $id
+     *            valeur de l'id
+     * @param array $champs
+     *            nom et valeur des champs
      */
-    public function put($table, $id, $champs){
-        $result = $this->accessBDD->updateOne($table, $id, $champs);	
-        if ($result == null || $result == false){
+    public function put($table, $id, $champs)
+    {
+        $result = $this->accessBDD->updateOne($table, $id, $champs);
+        if ($result == null || $result == false) {
             $this->reponse(400, "requete invalide");
-        }else{	
+        } else {
             $this->reponse(200, "OK");
         }
     }
-	
+
     /**
      * login et/ou pwd incorrects
      */
-    public function unauthorized(){
+    public function unauthorized()
+    {
         $this->reponse(401, "authentification incorrecte");
     }
 }
