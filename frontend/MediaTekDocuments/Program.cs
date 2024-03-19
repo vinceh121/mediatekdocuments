@@ -1,20 +1,28 @@
 ﻿using MediaTekDocuments.view;
 using System;
-using System.Windows.Forms;
+using Gtk;
 
 namespace MediaTekDocuments
 {
-    static class Program
-    {
-        /// <summary>
-        /// Point d'entrée principal de l'application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMediatek());
-        }
-    }
+	class Program
+	{
+		private Application _app;
+
+		/// <summary>
+		/// Point d'entrée principal de l'application.
+		/// </summary>
+		[STAThread]
+		static void Main()
+		{
+			Program prog = new();
+		}
+
+		public Program()
+		{
+			Application.Init();
+
+            this._app = new Application("me.vinceh121.mediatekdocuments", GLib.ApplicationFlags.None);
+            this._app.Register(GLib.Cancellable.Current);
+		}
+	}
 }
