@@ -1,28 +1,44 @@
-﻿using MediaTekDocuments.view;
+﻿using MediaTekDocuments.View;
 using System;
 using Gtk;
 
 namespace MediaTekDocuments
 {
-	class Program
+	public class Program
 	{
-		private Application _app;
+		private readonly Application _app;
+		private readonly MainWindow _mainWindow;
 
 		/// <summary>
 		/// Point d'entrée principal de l'application.
 		/// </summary>
 		[STAThread]
-		static void Main()
+		public static void Main()
 		{
 			Program prog = new();
+            prog.Start();
 		}
 
 		public Program()
 		{
 			Application.Init();
 
-            this._app = new Application("me.vinceh121.mediatekdocuments", GLib.ApplicationFlags.None);
-            this._app.Register(GLib.Cancellable.Current);
+			this._app = new Application("me.vinceh121.mediatekdocuments", GLib.ApplicationFlags.None);
+			this._app.Register(GLib.Cancellable.Current);
+
+			this._mainWindow = new(this);
+			this._app.AddWindow(this._mainWindow);
+		}
+
+		public void Start()
+		{
+			this._mainWindow.ShowAll();
+			Application.Run();
+		}
+
+		public Application GetApplication()
+		{
+			return this._app;
 		}
 	}
 }
