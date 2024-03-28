@@ -7,4 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->group('api/v1', static function ($routes) {
     $routes->resource('books');
+
+    $routes->resource('genres');
+    $routes->resource('publics');
 });
