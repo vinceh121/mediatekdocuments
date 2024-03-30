@@ -1,5 +1,5 @@
 ﻿
-namespace MediaTekDocuments.model
+namespace MediaTekDocuments.Model
 {
     /// <summary>
     /// Classe métier Revue hérite de Document : contient des propriétés spécifiques aux revues

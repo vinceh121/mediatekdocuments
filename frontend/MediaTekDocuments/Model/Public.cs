@@ -1,5 +1,5 @@
 ﻿
-namespace MediaTekDocuments.model
+namespace MediaTekDocuments.Model
 {
     /// <summary>
     /// Classe métier Public (public concerné par le document) hérite de Categorie

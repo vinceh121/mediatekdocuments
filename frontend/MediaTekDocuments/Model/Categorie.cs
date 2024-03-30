@@ -1,5 +1,5 @@
 ﻿
-namespace MediaTekDocuments.model
+namespace MediaTekDocuments.Model
 {
     /// <summary>
     /// Classe métier Categorie (réunit les informations des classes Public, Genre et Rayon)

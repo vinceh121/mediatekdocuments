@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MediaTekDocuments.model
+namespace MediaTekDocuments.Model
 {
     /// <summary>
     /// Classe métier Exemplaire (exemplaire d'une revue)

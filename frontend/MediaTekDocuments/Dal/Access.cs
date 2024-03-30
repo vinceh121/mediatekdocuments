@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MediaTekDocuments.model;
+using MediaTekDocuments.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;

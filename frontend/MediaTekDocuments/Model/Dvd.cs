@@ -1,5 +1,5 @@
 ﻿
-namespace MediaTekDocuments.model
+namespace MediaTekDocuments.Model
 {
     /// <summary>
     /// Classe métier Dvd hérite de LivreDvd : contient des propriétés spécifiques aux dvd
