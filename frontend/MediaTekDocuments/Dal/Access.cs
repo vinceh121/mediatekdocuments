@@ -60,10 +60,10 @@ namespace MediaTekDocuments.dal
         /// Retourne tous les genres à partir de la BDD
         /// </summary>
         /// <returns>Liste d'objets Genre</returns>
-        public async Task<List<Categorie>> GetAllGenres()
+        public async Task<List<Genre>> GetAllGenres()
         {
             var stream = await this._client.GetStreamAsync("genres");
-            return this.ParseCollection<Categorie>(stream);
+            return this.ParseCollection<Genre>(stream);
         }
 
         /// <summary>
@@ -80,10 +80,10 @@ namespace MediaTekDocuments.dal
         /// Retourne toutes les catégories de public à partir de la BDD
         /// </summary>
         /// <returns>Liste d'objets Public</returns>
-        public async Task<List<Categorie>> GetAllPublics()
+        public async Task<List<Public>> GetAllPublics()
         {
             var stream = await this._client.GetStreamAsync("publics");
-            return this.ParseCollection<Categorie>(stream);
+            return this.ParseCollection<Public>(stream);
         }
 
         /// <summary>
