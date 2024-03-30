@@ -5,7 +5,7 @@ namespace MediaTekDocuments.View
 {
 	public class MainWindow : ApplicationWindow
 	{
-		private Program _program;
+		private readonly Program _program;
 
 		public MainWindow(Program program) : this(program, new Builder("MainWindow.glade")) { }
 
@@ -14,6 +14,13 @@ namespace MediaTekDocuments.View
 			this._program = program;
 			this.Application = program.GetApplication();
 			builder.Autoconnect(this);
+
+			DeleteEvent += Window_DeleteEvent;
+		}
+
+		private void Window_DeleteEvent(object sender, DeleteEventArgs a)
+		{
+			Application.Quit();
 		}
 	}
 }

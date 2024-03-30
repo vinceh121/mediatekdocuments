@@ -15,8 +15,10 @@ namespace MediaTekDocuments
 		[STAThread]
 		public static void Main()
 		{
+			GLib.ExceptionManager.UnhandledException += HandleUncaughtException;
+
 			Program prog = new();
-            prog.Start();
+			prog.Start();
 		}
 
 		public Program()
@@ -39,6 +41,16 @@ namespace MediaTekDocuments
 		public Application GetApplication()
 		{
 			return this._app;
+		}
+
+		private static void HandleUncaughtException(GLib.UnhandledExceptionArgs args)
+		{
+			Console.WriteLine(args.ExceptionObject);
+			MessageDialog diag = new(null, 0,
+				MessageType.Error, ButtonsType.Ok, false,
+				"Erreur inattendue : {0}", [args.ExceptionObject]);
+			diag.Run();
+			diag.Destroy();
 		}
 	}
 }
