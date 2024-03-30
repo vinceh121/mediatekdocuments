@@ -12,7 +12,7 @@ class Document extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['titre', 'image', 'idRayon', 'idPublic', 'idGenre'];
 
     protected bool $allowEmptyInserts = false;
 

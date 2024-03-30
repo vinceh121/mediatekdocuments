@@ -5,9 +5,11 @@ use CodeIgniter\RESTful\ResourceController;
 use App\Models\Book;
 use CodeIgniter\Model;
 use CodeIgniter\HTTP\IncomingRequest;
+use App\Models\Document;
 
 /**
  *
+ * @property IncomingRequest request
  * @property Model model
  */
 class Books extends ResourceController
@@ -49,8 +51,13 @@ class Books extends ResourceController
 
     public function update($id = null)
     {
-        return $this->fail(lang('RESTful.notImplemented', [
-            'update'
-        ]), 501);
+        $body = $this->request->getJSON();
+        $success = $this->model->update($id, $body) && model(Document::class)->update($id, $body);
+
+        if ($success) {
+            return $this->respondUpdated();
+        } else {
+            return $this->failNotFound();
+        }
     }
 }
