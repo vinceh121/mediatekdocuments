@@ -72,7 +72,7 @@ namespace MediaTekDocuments.dal
         /// <returns>Liste d'objets Rayon</returns>
         public async Task<List<Rayon>> GetAllRayons()
         {
-            var stream = await this._client.GetStreamAsync("ailse");
+            var stream = await this._client.GetStreamAsync("aisles");
             return this.ParseCollection<Rayon>(stream);
         }
 

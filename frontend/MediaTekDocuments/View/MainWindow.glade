@@ -161,6 +161,7 @@
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
                             <property name="can-focus">False</property>
+                            <property name="id-column">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -198,7 +199,9 @@
                         <child>
                           <object class="GtkComboBox" id="_publicCombo">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can-focus">False</property>
+                            <property name="id-column">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -236,7 +239,9 @@
                         <child>
                           <object class="GtkComboBox" id="_aisleCombo">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can-focus">False</property>
+                            <property name="id-column">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
