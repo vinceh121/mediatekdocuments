@@ -37,6 +37,8 @@ namespace MediaTekDocuments.View
 		private readonly Entry _bookImagePath;
 		[UI]
 		private readonly Entry _bookIsbn;
+		[UI]
+		private readonly Image _bookImage;
 
 		public MainWindow(Program program) : this(program, new Builder("MainWindow.glade")) { }
 
@@ -149,14 +151,26 @@ namespace MediaTekDocuments.View
 			Livre livre = await Access.GetInstance().GetBook(id);
 
 			this._bookId.Text = livre.Id;
-            this._bookTitle.Text = livre.Titre;
-            this._bookAuthor.Text = livre.Auteur;
-            this._bookCollection.Text = livre.Collection;
-            this._bookGenre.Text = livre.Collection;
-            this._bookPublic.Text = livre.Public;
-            this._bookAisle.Text = livre.Rayon;
-            this._bookImagePath.Text = livre.Image;
-            this._bookIsbn.Text = livre.Isbn;
+			this._bookTitle.Text = livre.Titre;
+			this._bookAuthor.Text = livre.Auteur;
+			this._bookCollection.Text = livre.Collection;
+			this._bookGenre.Text = livre.Collection;
+			this._bookPublic.Text = livre.Public;
+			this._bookAisle.Text = livre.Rayon;
+			this._bookImagePath.Text = livre.Image;
+			this._bookIsbn.Text = livre.Isbn;
+
+            this._bookImage.Clear();
+			var image = await Access.GetInstance().GetBookImage(livre);
+
+			if (image != null)
+			{
+				this._bookImage.Pixbuf = image.ScaleSimple(256, 256, Gdk.InterpType.Hyper);
+			}
+			else
+			{
+                this._bookImage.IconName = "image-missing";
+			}
 		}
 
 		private void Window_DeleteEvent(object sender, DeleteEventArgs a)
