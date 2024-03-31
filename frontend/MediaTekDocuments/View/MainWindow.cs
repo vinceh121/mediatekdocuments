@@ -1,3 +1,4 @@
+using System;
 using Gtk;
 using MediaTekDocuments.dal;
 using MediaTekDocuments.Model;
@@ -18,6 +19,25 @@ namespace MediaTekDocuments.View
 		[UI]
 		private readonly TreeView _bookList;
 
+		[UI]
+		private readonly Entry _bookId;
+		[UI]
+		private readonly Entry _bookTitle;
+		[UI]
+		private readonly Entry _bookAuthor;
+		[UI]
+		private readonly Entry _bookCollection;
+		[UI]
+		private readonly Entry _bookGenre;
+		[UI]
+		private readonly Entry _bookPublic;
+		[UI]
+		private readonly Entry _bookAisle;
+		[UI]
+		private readonly Entry _bookImagePath;
+		[UI]
+		private readonly Entry _bookIsbn;
+
 		public MainWindow(Program program) : this(program, new Builder("MainWindow.glade")) { }
 
 		private MainWindow(Program program, Builder builder) : base(builder.GetRawOwnedObject("MainWindow"))
@@ -27,6 +47,18 @@ namespace MediaTekDocuments.View
 			builder.Autoconnect(this);
 
 			DeleteEvent += Window_DeleteEvent;
+
+			this._bookList.CursorChanged += (_, _) =>
+			{
+				TreeIter iter = new();
+				this._bookList.Selection.GetSelected(out iter);
+				string id = (string)this._bookList.Model.GetValue(iter, 0);
+
+				if (id != null)
+				{
+					this.SelectBook(id);
+				}
+			};
 
 			this.FillAisles();
 			this.FillPublics();
@@ -110,6 +142,21 @@ namespace MediaTekDocuments.View
 			}
 
 			this._bookList.Model = model;
+		}
+
+		private async void SelectBook(string id)
+		{
+			Livre livre = await Access.GetInstance().GetBook(id);
+
+			this._bookId.Text = livre.Id;
+            this._bookTitle.Text = livre.Titre;
+            this._bookAuthor.Text = livre.Auteur;
+            this._bookCollection.Text = livre.Collection;
+            this._bookGenre.Text = livre.Collection;
+            this._bookPublic.Text = livre.Public;
+            this._bookAisle.Text = livre.Rayon;
+            this._bookImagePath.Text = livre.Image;
+            this._bookIsbn.Text = livre.Isbn;
 		}
 
 		private void Window_DeleteEvent(object sender, DeleteEventArgs a)

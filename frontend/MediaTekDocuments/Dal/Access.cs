@@ -96,6 +96,12 @@ namespace MediaTekDocuments.dal
             return this.ParseCollection<Livre>(stream);
         }
 
+        public async Task<Livre> GetBook(string id)
+        {
+            var stream = await this._client.GetStreamAsync("books/" + id);
+            return this.ParseObject<Livre>(stream);
+        }
+
         /// <summary>
         /// Retourne toutes les dvd à partir de la BDD
         /// </summary>
