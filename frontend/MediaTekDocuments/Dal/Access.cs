@@ -9,6 +9,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using Gdk;
+using System.Collections.Specialized;
+using GLib;
+using Gtk;
+using System.Web;
 
 namespace MediaTekDocuments.dal
 {
@@ -98,6 +102,19 @@ namespace MediaTekDocuments.dal
 			return this.ParseCollection<Livre>(stream);
 		}
 
+		public async Task<List<Livre>> GetLivres(Dictionary<string, object> filters)
+		{
+			NameValueCollection query = HttpUtility.ParseQueryString(String.Empty);
+
+			foreach (KeyValuePair<string, object> p in filters)
+			{
+				query.Add(p.Key, p.Value?.ToString());
+			}
+
+			var stream = await this._client.GetStreamAsync("books?" + query.ToString());
+			return this.ParseCollection<Livre>(stream);
+		}
+
 		public async Task<Livre> GetBook(string id)
 		{
 			var stream = await this._client.GetStreamAsync("books/" + id);
@@ -118,7 +135,7 @@ namespace MediaTekDocuments.dal
 					return null;
 				}
 
-				throw e;
+				throw;
 			}
 		}
 

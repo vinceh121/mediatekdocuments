@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Gtk;
 using MediaTekDocuments.dal;
 using MediaTekDocuments.Model;
@@ -40,6 +41,11 @@ namespace MediaTekDocuments.View
 		[UI]
 		private readonly Image _bookImage;
 
+		[UI]
+		private readonly SearchEntry _titleSearch;
+		[UI]
+		private readonly SearchEntry _numberSearch;
+
 		public MainWindow(Program program) : this(program, new Builder("MainWindow.glade")) { }
 
 		private MainWindow(Program program, Builder builder) : base(builder.GetRawOwnedObject("MainWindow"))
@@ -62,9 +68,15 @@ namespace MediaTekDocuments.View
 				}
 			};
 
+
+			new List<SearchEntry> { this._titleSearch, this._numberSearch }.ForEach(e => e.SearchChanged += (_, _) => { this.FillBooks(); });
+
+			new List<ComboBox> { this._genreCombo, this._aisleCombo, this._publicCombo }.ForEach(e => e.Changed += (_, _) => { this.FillBooks(); });
+
 			this.FillAisles();
 			this.FillPublics();
 			this.FillGenres();
+			this.FillBookColumns();
 			this.FillBooks();
 		}
 
@@ -116,7 +128,7 @@ namespace MediaTekDocuments.View
 			SetComboboxTextRenderer(this._genreCombo);
 		}
 
-		private async void FillBooks()
+		private void FillBookColumns()
 		{
 			int i = 0;
 			this._bookList.AppendColumn(new TreeViewColumn("ID", new CellRendererText() { Weight = 100 }, "text", i++) { Reorderable = true });
@@ -126,9 +138,41 @@ namespace MediaTekDocuments.View
 			this._bookList.AppendColumn(new TreeViewColumn("Genre", new CellRendererText(), "text", i++));
 			this._bookList.AppendColumn(new TreeViewColumn("Public", new CellRendererText(), "text", i++));
 			this._bookList.AppendColumn(new TreeViewColumn("Rayon", new CellRendererText(), "text", i++));
+		}
 
-			var books = await Access.GetInstance().GetAllLivres();
+		private async void FillBooks()
+		{
+			var filters = new Dictionary<string, object>();
+
+			if (this._titleSearch.Text.Length != 0)
+			{
+				filters.Add("title", this._titleSearch.Text);
+			}
+
+			if (this._numberSearch.Text.Length != 0)
+			{
+				filters.Add("id", this._numberSearch.Text);
+			}
+
+			if (this._genreCombo.ActiveId != null)
+			{
+				filters.Add("genre", this._genreCombo.ActiveId);
+			}
+
+			if (this._publicCombo.ActiveId != null)
+			{
+				filters.Add("public", this._publicCombo.ActiveId);
+			}
+
+			if (this._aisleCombo.ActiveId != null)
+			{
+				filters.Add("aisle", this._aisleCombo.ActiveId);
+			}
+
+			var books = await Access.GetInstance().GetLivres(filters);
+
 			ListStore model = new(GLib.GType.String, GLib.GType.String, GLib.GType.String, GLib.GType.String, GLib.GType.String, GLib.GType.String, GLib.GType.String);
+			this._bookList.Model = model;
 
 			foreach (Livre b in books)
 			{
@@ -142,8 +186,6 @@ namespace MediaTekDocuments.View
 				model.SetValue(iter, j++, b.Public);
 				model.SetValue(iter, j++, b.Rayon);
 			}
-
-			this._bookList.Model = model;
 		}
 
 		private async void SelectBook(string id)
@@ -157,10 +199,10 @@ namespace MediaTekDocuments.View
 			this._bookGenre.Text = livre.Collection;
 			this._bookPublic.Text = livre.Public;
 			this._bookAisle.Text = livre.Rayon;
-			this._bookImagePath.Text = livre.Image;
+			this._bookImagePath.Text = Access.GetImageUrl(livre.Image);
 			this._bookIsbn.Text = livre.Isbn;
 
-            this._bookImage.Clear();
+			this._bookImage.Clear();
 			var image = await Access.GetInstance().GetBookImage(livre);
 
 			if (image != null)
@@ -169,7 +211,7 @@ namespace MediaTekDocuments.View
 			}
 			else
 			{
-                this._bookImage.IconName = "image-missing";
+				this._bookImage.IconName = "image-missing";
 			}
 		}
 
@@ -185,7 +227,6 @@ namespace MediaTekDocuments.View
 			cbx.SetAttributes(txtRender, "id", 0);
 			cbx.AddAttribute(txtRender, "text", 1);
 
-			cbx.IdColumn = 1;
 			cbx.Active = 0;
 
 			cbx.Sensitive = true;
