@@ -22,7 +22,7 @@ class Books extends ResourceController
     public function index()
     {
         /** @var Book $builder */
-        $builder = $this->model->join('document', 'livre.id = document.id');
+        $builder = $this->model->aggregates();
 
         if ($this->request->getGet('author')) {
             $builder->like('auteur', sprintf('%%%s%%', $this->request->getGet('author')));
@@ -45,8 +45,7 @@ class Books extends ResourceController
             return $this->failNotFound();
         }
 
-        return $this->respond($this->model->join('document', 'livre.id = document.id')
-            ->find($id));
+        return $this->respond($this->model->aggregates()->find($id));
     }
 
     public function update($id = null)

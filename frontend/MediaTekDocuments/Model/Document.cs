@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json;
+
 namespace MediaTekDocuments.Model
 {
     /// <summary>
@@ -12,6 +14,7 @@ namespace MediaTekDocuments.Model
         public string IdGenre { get; }
         public string Genre { get; }
         public string IdPublic { get; }
+        [JsonProperty("public")] 
         public string Public { get; }
         public string IdRayon { get; }
         public string Rayon { get; }

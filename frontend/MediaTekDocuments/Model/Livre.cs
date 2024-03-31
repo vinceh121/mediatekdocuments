@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json;
+
 namespace MediaTekDocuments.Model
 {
     /// <summary>
@@ -11,7 +13,7 @@ namespace MediaTekDocuments.Model
         public string Collection { get; }
 
         public Livre(string id, string titre, string image, string isbn, string auteur, string collection,
-            string idGenre, string genre, string idPublic, string lePublic, string idRayon, string rayon)
+            string idGenre, string genre, string idPublic, [JsonProperty("public")] string lePublic, string idRayon, string rayon)
             : base(id, titre, image, idGenre, genre, idPublic, lePublic, idRayon, rayon)
         {
             this.Isbn = isbn;
