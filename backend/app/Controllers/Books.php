@@ -71,7 +71,7 @@ class Books extends ResourceController
         $successBook = $this->model->update($id, $body);
         $successDoc = model(Document::class)->update($id, $body);
 
-        if ($successBook || $successDoc) {
+        if ($successBook && $successDoc) {
             return $this->respondUpdated();
         } else {
             return $this->failNotFound();
