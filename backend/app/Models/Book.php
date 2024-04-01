@@ -46,6 +46,7 @@ class Book extends Model
         ->join('document', 'livre.id = document.id')
         ->join('rayon', 'document.idRayon = rayon.id')
         ->join('public', 'document.idPublic = public.id')
-        ->join('genre', 'document.idGenre = genre.id');
+        ->join('genre', 'document.idGenre = genre.id')
+        ->orderBy('livre.id');
     }
 }
