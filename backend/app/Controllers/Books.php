@@ -77,4 +77,10 @@ class Books extends ResourceController
             return $this->failNotFound();
         }
     }
+
+    public function delete($id = null)
+    {
+        $this->model->delete($id);
+        return $this->respondDeleted();
+    }
 }

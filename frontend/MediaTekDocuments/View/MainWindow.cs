@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using Gtk;
 using MediaTekDocuments.dal;
@@ -49,6 +50,8 @@ namespace MediaTekDocuments.View
 
 		[UI]
 		private readonly Button _btnUpdateBook;
+		[UI]
+		private readonly Button _btnDeleteBook;
 
 		public MainWindow(Program program) : this(program, new Builder("MainWindow.glade")) { }
 
@@ -77,6 +80,7 @@ namespace MediaTekDocuments.View
 				.ForEach(e => e.Changed += (_, _) => { this.FillBooks(); });
 
 			this._btnUpdateBook.Clicked += (_, _) => this.UpdateBook();
+			this._btnDeleteBook.Clicked += (_, _) => this.DeleteBook();
 
 			new List<Entry> { this._bookTitle, this._bookAuthor, this._bookCollection, this._bookIsbn }
 				.ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
@@ -246,6 +250,30 @@ namespace MediaTekDocuments.View
 
 			this._btnUpdateBook.Sensitive = false;
 			this.FillBooks();
+		}
+
+		private void DeleteBook()
+		{
+			MessageDialog diag = new(null,
+				DialogFlags.Modal,
+				MessageType.Warning,
+				ButtonsType.YesNo,
+				true,
+				"Êtes vous sûr de vouloir supprimer le livre <b>{0}</b> ?",
+				[this._bookTitle.Text]);
+
+			diag.Response += async (object o, ResponseArgs args) =>
+			{
+				diag.Destroy();
+
+				if (args.ResponseId == ResponseType.Yes)
+				{
+					await Access.GetInstance().DeleteBook(this._bookId.Text);
+					this.FillBooks();
+				}
+			};
+
+			diag.Run();
 		}
 
 		private string GetSelectedBook()

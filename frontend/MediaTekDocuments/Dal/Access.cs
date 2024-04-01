@@ -144,10 +144,15 @@ namespace MediaTekDocuments.dal
 			await this._client.PatchAsync("books/" + id, new StringContent(body, jsonMimeType));
 		}
 
-		public async void UpdateBook(string id, string field, string value)
+		public async Task UpdateBook(string id, string field, string value)
 		{
 			var body = JsonConvert.SerializeObject(new Dictionary<object, object>() { { field, value } });
 			await this._client.PatchAsync("books/" + id, new StringContent(body, jsonMimeType));
+		}
+
+		public async Task DeleteBook(string id)
+		{
+			await this._client.DeleteAsync("books/" + id);
 		}
 
 		/// <summary>
