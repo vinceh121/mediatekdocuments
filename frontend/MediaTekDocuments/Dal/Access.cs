@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using MediaTekDocuments.Model;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using Gdk;
 using System.Collections.Specialized;
-using GLib;
-using Gtk;
 using System.Web;
+using System.Net.Http.Headers;
 
 namespace MediaTekDocuments.dal
 {
@@ -21,6 +17,7 @@ namespace MediaTekDocuments.dal
 	/// </summary>
 	public class Access
 	{
+		private static readonly MediaTypeHeaderValue jsonMimeType = new("application/json");
 		private static readonly string imageUri = "http://mediatekdocuments.local/content/";
 		/// <summary>
 		/// adresse de l'API
@@ -49,6 +46,8 @@ namespace MediaTekDocuments.dal
 				String base64EncodedAuthenticationString = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(authenticationString));
 				_client.DefaultRequestHeaders.Add("Authorization", "Basic " + base64EncodedAuthenticationString);
 			}
+
+			this._client.DefaultRequestHeaders.Add("Accept", "application/json");
 
 			this._serializer = JsonSerializer.CreateDefault();
 		}
@@ -137,6 +136,18 @@ namespace MediaTekDocuments.dal
 
 				throw;
 			}
+		}
+
+		public async Task UpdateBook(string id, Dictionary<string, object> parameters)
+		{
+			var body = JsonConvert.SerializeObject(parameters);
+			await this._client.PatchAsync("books/" + id, new StringContent(body, jsonMimeType));
+		}
+
+		public async void UpdateBook(string id, string field, string value)
+		{
+			var body = JsonConvert.SerializeObject(new Dictionary<object, object>() { { field, value } });
+			await this._client.PatchAsync("books/" + id, new StringContent(body, jsonMimeType));
 		}
 
 		/// <summary>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Gtk;
 using MediaTekDocuments.dal;
 using MediaTekDocuments.Model;
@@ -46,6 +47,9 @@ namespace MediaTekDocuments.View
 		[UI]
 		private readonly SearchEntry _numberSearch;
 
+		[UI]
+		private readonly Button _btnUpdateBook;
+
 		public MainWindow(Program program) : this(program, new Builder("MainWindow.glade")) { }
 
 		private MainWindow(Program program, Builder builder) : base(builder.GetRawOwnedObject("MainWindow"))
@@ -58,9 +62,7 @@ namespace MediaTekDocuments.View
 
 			this._bookList.CursorChanged += (_, _) =>
 			{
-				TreeIter iter = new();
-				this._bookList.Selection.GetSelected(out iter);
-				string id = (string)this._bookList.Model.GetValue(iter, 0);
+				string id = this.GetSelectedBook();
 
 				if (id != null)
 				{
@@ -68,10 +70,16 @@ namespace MediaTekDocuments.View
 				}
 			};
 
+			new List<SearchEntry> { this._titleSearch, this._numberSearch }
+				.ForEach(e => e.SearchChanged += (_, _) => { this.FillBooks(); });
 
-			new List<SearchEntry> { this._titleSearch, this._numberSearch }.ForEach(e => e.SearchChanged += (_, _) => { this.FillBooks(); });
+			new List<ComboBox> { this._genreCombo, this._aisleCombo, this._publicCombo }
+				.ForEach(e => e.Changed += (_, _) => { this.FillBooks(); });
 
-			new List<ComboBox> { this._genreCombo, this._aisleCombo, this._publicCombo }.ForEach(e => e.Changed += (_, _) => { this.FillBooks(); });
+			this._btnUpdateBook.Clicked += (_, _) => this.UpdateBook();
+
+			new List<Entry> { this._bookTitle, this._bookAuthor, this._bookCollection, this._bookIsbn }
+				.ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
 
 			this.FillAisles();
 			this.FillPublics();
@@ -196,7 +204,7 @@ namespace MediaTekDocuments.View
 			this._bookTitle.Text = livre.Titre;
 			this._bookAuthor.Text = livre.Auteur;
 			this._bookCollection.Text = livre.Collection;
-			this._bookGenre.Text = livre.Collection;
+			this._bookGenre.Text = livre.Genre;
 			this._bookPublic.Text = livre.Public;
 			this._bookAisle.Text = livre.Rayon;
 			this._bookImagePath.Text = Access.GetImageUrl(livre.Image);
@@ -213,6 +221,29 @@ namespace MediaTekDocuments.View
 			{
 				this._bookImage.IconName = "image-missing";
 			}
+		}
+
+		private async void UpdateBook()
+		{
+			Dictionary<string, object> parameters = new()
+			{
+				{ "titre", this._bookTitle.Text },
+				{ "auteur", this._bookAuthor.Text },
+				{ "ISBN", this._bookIsbn.Text },
+				{ "collection", this._bookCollection.Text }
+			};
+
+			await Access.GetInstance().UpdateBook(this._bookId.Text, parameters);
+
+			this._btnUpdateBook.Sensitive = false;
+			this.FillBooks();
+		}
+
+		private string GetSelectedBook()
+		{
+			this._bookList.Selection.GetSelected(out TreeIter iter);
+			string id = (string)this._bookList.Model.GetValue(iter, 0);
+			return id;
 		}
 
 		private void Window_DeleteEvent(object sender, DeleteEventArgs a)

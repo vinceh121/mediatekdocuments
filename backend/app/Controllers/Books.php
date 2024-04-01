@@ -68,9 +68,10 @@ class Books extends ResourceController
     public function update($id = null)
     {
         $body = $this->request->getJSON();
-        $success = $this->model->update($id, $body) && model(Document::class)->update($id, $body);
+        $successBook = $this->model->update($id, $body);
+        $successDoc = model(Document::class)->update($id, $body);
 
-        if ($success) {
+        if ($successBook || $successDoc) {
             return $this->respondUpdated();
         } else {
             return $this->failNotFound();
