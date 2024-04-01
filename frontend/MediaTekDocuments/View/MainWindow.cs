@@ -30,15 +30,15 @@ namespace MediaTekDocuments.View
 		[UI]
 		private readonly Entry _bookCollection;
 		[UI]
-		private readonly Entry _bookGenre;
-		[UI]
-		private readonly Entry _bookPublic;
-		[UI]
-		private readonly Entry _bookAisle;
-		[UI]
 		private readonly Entry _bookImagePath;
 		[UI]
 		private readonly Entry _bookIsbn;
+		[UI]
+		private readonly ComboBox _bookGenre;
+		[UI]
+		private readonly ComboBox _bookPublic;
+		[UI]
+		private readonly ComboBox _bookAisle;
 		[UI]
 		private readonly Image _bookImage;
 
@@ -81,6 +81,9 @@ namespace MediaTekDocuments.View
 			new List<Entry> { this._bookTitle, this._bookAuthor, this._bookCollection, this._bookIsbn }
 				.ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
 
+			new List<ComboBox> { this._bookGenre, this._bookPublic, this._bookAisle }
+				.ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
+
 			this.FillAisles();
 			this.FillPublics();
 			this.FillGenres();
@@ -99,9 +102,10 @@ namespace MediaTekDocuments.View
 				aislesModel.AppendValues(r.Id, r.Libelle);
 			}
 
-			this._aisleCombo.Model = aislesModel;
+			this._aisleCombo.Model = this._bookAisle.Model = aislesModel;
 
 			SetComboboxTextRenderer(this._aisleCombo);
+			SetComboboxTextRenderer(this._bookAisle);
 		}
 
 		private async void FillPublics()
@@ -115,9 +119,10 @@ namespace MediaTekDocuments.View
 				publicsModel.AppendValues(p.Id, p.Libelle);
 			}
 
-			this._publicCombo.Model = publicsModel;
+			this._publicCombo.Model = this._bookPublic.Model = publicsModel;
 
 			SetComboboxTextRenderer(this._publicCombo);
+			SetComboboxTextRenderer(this._bookPublic);
 		}
 
 		private async void FillGenres()
@@ -131,9 +136,10 @@ namespace MediaTekDocuments.View
 				genresModel.AppendValues(g.Id, g.Libelle);
 			}
 
-			this._genreCombo.Model = genresModel;
+			this._genreCombo.Model = this._bookGenre.Model = genresModel;
 
 			SetComboboxTextRenderer(this._genreCombo);
+			SetComboboxTextRenderer(this._bookGenre);
 		}
 
 		private void FillBookColumns()
@@ -204,9 +210,9 @@ namespace MediaTekDocuments.View
 			this._bookTitle.Text = livre.Titre;
 			this._bookAuthor.Text = livre.Auteur;
 			this._bookCollection.Text = livre.Collection;
-			this._bookGenre.Text = livre.Genre;
-			this._bookPublic.Text = livre.Public;
-			this._bookAisle.Text = livre.Rayon;
+			this._bookGenre.ActiveId = livre.IdGenre;
+			this._bookPublic.ActiveId = livre.IdPublic;
+			this._bookAisle.ActiveId = livre.IdRayon;
 			this._bookImagePath.Text = Access.GetImageUrl(livre.Image);
 			this._bookIsbn.Text = livre.Isbn;
 
@@ -230,7 +236,10 @@ namespace MediaTekDocuments.View
 				{ "titre", this._bookTitle.Text },
 				{ "auteur", this._bookAuthor.Text },
 				{ "ISBN", this._bookIsbn.Text },
-				{ "collection", this._bookCollection.Text }
+				{ "collection", this._bookCollection.Text },
+				{ "idRayon", this._bookAisle.ActiveId },
+				{ "idPublic", this._bookPublic.ActiveId },
+				{ "idGenre", this._bookGenre.ActiveId },
 			};
 
 			await Access.GetInstance().UpdateBook(this._bookId.Text, parameters);

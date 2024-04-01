@@ -483,36 +483,6 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkEntry" id="_bookGenre">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">4</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="_bookPublic">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">5</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="_bookAisle">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                          </object>
-                          <packing>
-                            <property name="left-attach">1</property>
-                            <property name="top-attach">6</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkEntry" id="_bookImagePath">
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
@@ -547,6 +517,39 @@
                           <packing>
                             <property name="left-attach">1</property>
                             <property name="top-attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBox" id="_bookGenre">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="id-column">0</property>
+                          </object>
+                          <packing>
+                            <property name="left-attach">1</property>
+                            <property name="top-attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBox" id="_bookPublic">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="id-column">0</property>
+                          </object>
+                          <packing>
+                            <property name="left-attach">1</property>
+                            <property name="top-attach">5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBox" id="_bookAisle">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="id-column">0</property>
+                          </object>
+                          <packing>
+                            <property name="left-attach">1</property>
+                            <property name="top-attach">6</property>
                           </packing>
                         </child>
                       </object>
