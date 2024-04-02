@@ -1,3 +1,4 @@
+using System;
 using Gtk;
 using MediaTekDocuments.dal;
 using UI = Gtk.Builder.ObjectAttribute;
@@ -32,23 +33,23 @@ namespace MediaTekDocuments.View
 
 		private async void Login()
 		{
-			var success = await Access.GetInstance().Login(this._inputEmail.Text, this._inputPwd.Text);
-
-			if (success)
+			try
 			{
+				await Access.GetInstance().Login(this._inputEmail.Text, this._inputPwd.Text);
+
 				var win = new MainWindow(this._program);
 				win.ShowAll();
 				this.Destroy();
 			}
-			else
+			catch (Exception e)
 			{
 				MessageDialog diag = new(null,
-					0,
-					MessageType.Error,
-					ButtonsType.Ok,
-					false,
-					"Email ou Mot de passe invalide",
-					[]);
+									0,
+									MessageType.Error,
+									ButtonsType.Ok,
+									false,
+									"Error de connexion: {0}",
+									[e.Message]);
 
 				diag.Run();
 				diag.Destroy();

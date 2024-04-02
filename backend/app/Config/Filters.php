@@ -9,6 +9,7 @@ use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use App\Filters\AuthFilter;
+use App\Filters\WriteAccessFilter;
 
 class Filters extends BaseConfig
 {
@@ -26,6 +27,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'auth'          => AuthFilter::class,
+        'write'         => WriteAccessFilter::class,
     ];
 
     /**
@@ -37,6 +39,7 @@ class Filters extends BaseConfig
     public array $globals = [
         'before' => [
             'auth' => ['except' => 'api/v1/security/*'],
+            'write' => ['except' => 'api/v1/security/*'],
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
