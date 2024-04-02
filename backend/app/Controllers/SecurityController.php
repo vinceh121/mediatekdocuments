@@ -32,7 +32,9 @@ class SecurityController extends BaseController
             log_message('info', sprintf('successful authentication for user %s', $email));
             session()->set('userId', $user['id']);
 
-            return $this->respond(null, 200);
+            return $this->respond([
+                'readOnly' => $user['service_id'] != Service::ADMIN,
+            ], 200);
         }
     }
 }

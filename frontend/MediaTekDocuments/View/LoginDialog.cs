@@ -35,9 +35,9 @@ namespace MediaTekDocuments.View
 		{
 			try
 			{
-				await Access.GetInstance().Login(this._inputEmail.Text, this._inputPwd.Text);
+				var res = await Access.GetInstance().Login(this._inputEmail.Text, this._inputPwd.Text);
 
-				var win = new MainWindow(this._program);
+				var win = new MainWindow(this._program, res.ReadOnly);
 				win.ShowAll();
 				this.Destroy();
 			}

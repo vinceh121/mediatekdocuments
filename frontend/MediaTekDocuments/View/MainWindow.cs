@@ -55,11 +55,14 @@ namespace MediaTekDocuments.View
 		[UI]
 		private readonly Button _btnDeleteBook;
 
-		public MainWindow(Program program) : this(program, new Builder("MainWindow.glade")) { }
+		private bool _readOnly;
 
-		private MainWindow(Program program, Builder builder) : base(builder.GetRawOwnedObject("MainWindow"))
+		public MainWindow(Program program, bool readOnly) : this(program, readOnly, new Builder("MainWindow.glade")) { }
+
+		private MainWindow(Program program, bool readOnly, Builder builder) : base(builder.GetRawOwnedObject("MainWindow"))
 		{
 			this._program = program;
+			this._readOnly = readOnly;
 			this.Application = program.GetApplication();
 			builder.Autoconnect(this);
 
@@ -85,11 +88,25 @@ namespace MediaTekDocuments.View
 			this._btnUpdateBook.Clicked += (_, _) => this.UpdateBook();
 			this._btnDeleteBook.Clicked += (_, _) => this.DeleteBook();
 
-			new List<Entry> { this._bookTitle, this._bookAuthor, this._bookCollection, this._bookIsbn }
-				.ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
+			if (readOnly)
+			{
+				this._btnCreateBook.Sensitive = false;
+				this._btnUpdateBook.Sensitive = false;
+				this._btnDeleteBook.Sensitive = false;
 
-			new List<ComboBox> { this._bookGenre, this._bookPublic, this._bookAisle }
-				.ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
+				new List<Entry> { this._bookTitle, this._bookAuthor, this._bookCollection, this._bookIsbn }
+					.ForEach(e => e.Sensitive = false);
+				new List<ComboBox> { this._bookGenre, this._bookPublic, this._bookAisle }
+					.ForEach(e => e.Sensitive = false);
+			}
+			else
+			{
+				new List<Entry> { this._bookTitle, this._bookAuthor, this._bookCollection, this._bookIsbn }
+					.ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
+
+				new List<ComboBox> { this._bookGenre, this._bookPublic, this._bookAisle }
+					.ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
+			}
 
 			this.FillAisles();
 			this.FillPublics();

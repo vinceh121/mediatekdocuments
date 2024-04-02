@@ -53,7 +53,7 @@ namespace MediaTekDocuments.dal
 			return _instance;
 		}
 
-		public async Task<bool> Login(string email, string password)
+		public async Task<LoginResponse> Login(string email, string password)
 		{
 			var body = JsonConvert.SerializeObject(new Dictionary<string, string> { { "email", email }, { "password", password } });
 			var res = await this._client.PostAsync("security/login", new StringContent(body, jsonMimeType));
@@ -65,12 +65,14 @@ namespace MediaTekDocuments.dal
 			}
 			else if (res.StatusCode == System.Net.HttpStatusCode.OK)
 			{
-				return true;
+				var loginRes = this.ParseObject<LoginResponse>(await res.Content.ReadAsStreamAsync());
+
+				return loginRes;
 			}
 			else
 			{
 				res.EnsureSuccessStatusCode();
-				return false; // never returns, always throws
+				return null; // never returns, always throws
 			}
 		}
 
