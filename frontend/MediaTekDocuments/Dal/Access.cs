@@ -9,6 +9,8 @@ using Gdk;
 using System.Collections.Specialized;
 using System.Web;
 using System.Net.Http.Headers;
+using System.Collections.Concurrent;
+using System.Text.Json.Serialization;
 
 namespace MediaTekDocuments.dal
 {
@@ -59,6 +61,26 @@ namespace MediaTekDocuments.dal
 		public static Access GetInstance()
 		{
 			return _instance;
+		}
+
+		public async Task<bool> Login(string email, string password)
+		{
+			var body = JsonConvert.SerializeObject(new Dictionary<string, string> { { "email", email }, { "password", password } });
+			var stream = await this._client.PostAsync("security/login", new StringContent(body, jsonMimeType));
+
+			if (stream.StatusCode == System.Net.HttpStatusCode.Forbidden)
+			{
+				return false;
+			}
+			else if (stream.StatusCode == System.Net.HttpStatusCode.OK)
+			{
+				return true;
+			}
+			else
+			{
+				stream.EnsureSuccessStatusCode();
+				return false; // never returns, always throws
+			}
 		}
 
 		/// <summary>

@@ -26,44 +26,13 @@ class AuthFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        $header = $request->header('Authorization');
+        $session = session();
 
-        if (!$header || is_array($header)) {
-            return response()->setStatusCode(401)
-                ->appendHeader('WWW-Authenticate', 'Basic realm=RESTAPI')
-                ->setJSON([
-                'message' => 'exactly one basic authorization must be provided'
+        if (!$session->get('userId')) {
+            return response()->setStatusCode(401)->setJSON([
+                'message' => 'authentication required'
             ]);
         }
-
-        if (!str_starts_with($header->getValue(), 'Basic ')) {
-            return $this->wrongUsernameOrPassword();
-        }
-
-        $authB64 = substr($header->getValue(), strlen('Basic '));
-
-        $auth = base64_decode($authB64, true);
-        $authParts = explode(':', $auth);
-
-        if (count($authParts) !== 2) {
-            return $this->wrongUsernameOrPassword();
-        }
-
-        $email = $authParts[0];
-        $password = $authParts[1];
-
-        $user = model(User::class)->where('email', $email)->first();
-
-        if (!$user || !password_verify($password, $user['password'])) {
-            return $this->wrongUsernameOrPassword();
-        }
-    }
-
-    private function wrongUsernameOrPassword()
-    {
-        return response()->setStatusCode(403)->setJSON([
-            'message' => 'wrong username or password'
-        ]);
     }
 
     /**
