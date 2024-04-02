@@ -10,7 +10,7 @@ class FileController extends BaseController
 
     public function get(string $fileName)
     {
-        return $this->response->download(WRITEPATH . 'uploads/' . $fileName, null, true); // FIXME path traversal
+        return $this->response->download(WRITEPATH . 'uploads/' . helper('security')->sanitize_filename($fileName), null, true);
     }
 
     public function post()
