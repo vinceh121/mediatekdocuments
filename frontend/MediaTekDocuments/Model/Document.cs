@@ -9,13 +9,18 @@ namespace MediaTekDocuments.Model
     public class Document
     {
         public string Id { get; }
+        [JsonProperty("titre")]
         public string Titre { get; }
+        [JsonProperty("image")]
         public string Image { get; }
+        [JsonProperty("idGenre")]
         public string IdGenre { get; }
         public string Genre { get; }
+        [JsonProperty("idPublic")]
         public string IdPublic { get; }
         [JsonProperty("public")] 
         public string Public { get; }
+        [JsonProperty("idRayon")]
         public string IdRayon { get; }
         public string Rayon { get; }
 

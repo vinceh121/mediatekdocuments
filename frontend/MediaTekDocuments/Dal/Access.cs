@@ -138,6 +138,14 @@ namespace MediaTekDocuments.dal
 			}
 		}
 
+		public async Task CreateBook(Livre book)
+		{
+			var body = JsonConvert.SerializeObject(book, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+			var res = await this._client.PostAsync("books", new StringContent(body, jsonMimeType));
+
+			res.EnsureSuccessStatusCode();
+		}
+
 		public async Task UpdateBook(string id, Dictionary<string, object> parameters)
 		{
 			var body = JsonConvert.SerializeObject(parameters);

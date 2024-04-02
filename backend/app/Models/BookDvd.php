@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Document extends Model
+class BookDvd extends Model
 {
-    protected $table            = 'document';
+    protected $table            = 'livres_dvd';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [ 'id', 'titre', 'image', 'idRayon', 'idPublic', 'idGenre' ];
+    protected $allowedFields    = [ 'id' ];
 
     protected bool $allowEmptyInserts = false;
 

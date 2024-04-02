@@ -49,6 +49,8 @@ namespace MediaTekDocuments.View
 		private readonly SearchEntry _numberSearch;
 
 		[UI]
+		private readonly Button _btnCreateBook;
+		[UI]
 		private readonly Button _btnUpdateBook;
 		[UI]
 		private readonly Button _btnDeleteBook;
@@ -79,6 +81,7 @@ namespace MediaTekDocuments.View
 			new List<ComboBox> { this._genreCombo, this._aisleCombo, this._publicCombo }
 				.ForEach(e => e.Changed += (_, _) => { this.FillBooks(); });
 
+			this._btnCreateBook.Clicked += (_, _) => this.CreateBook();
 			this._btnUpdateBook.Clicked += (_, _) => this.UpdateBook();
 			this._btnDeleteBook.Clicked += (_, _) => this.DeleteBook();
 
@@ -233,6 +236,13 @@ namespace MediaTekDocuments.View
 			}
 		}
 
+		private void CreateBook()
+		{
+			CreateBookDialog diag = new(this._program);
+			diag.Destroyed += (_, _) => this.FillBooks();
+			diag.Run();
+		}
+
 		private async void UpdateBook()
 		{
 			Dictionary<string, object> parameters = new()
@@ -288,7 +298,7 @@ namespace MediaTekDocuments.View
 			Application.Quit();
 		}
 
-		private static void SetComboboxTextRenderer(ComboBox cbx)
+		public static void SetComboboxTextRenderer(ComboBox cbx)
 		{
 			CellRendererText txtRender = new();
 			cbx.PackStart(txtRender, true);
