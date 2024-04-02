@@ -5,10 +5,11 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
-using Gdk;
 using System.Collections.Specialized;
 using System.Web;
 using System.Net.Http.Headers;
+using System.Collections.Concurrent;
+using System.Text.Json.Serialization;
 
 namespace MediaTekDocuments.dal
 {
@@ -37,16 +38,7 @@ namespace MediaTekDocuments.dal
 		/// </summary>
 		private Access()
 		{
-			const String authenticationString = "admin:adminpwd";
-
-			_client = new HttpClient() { BaseAddress = new Uri(uriApi) };
-
-			if (!String.IsNullOrEmpty(authenticationString))
-			{
-				String base64EncodedAuthenticationString = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(authenticationString));
-				_client.DefaultRequestHeaders.Add("Authorization", "Basic " + base64EncodedAuthenticationString);
-			}
-
+			this._client = new HttpClient() { BaseAddress = new Uri(uriApi) };
 			this._client.DefaultRequestHeaders.Add("Accept", "application/json");
 
 			this._serializer = JsonSerializer.CreateDefault();
@@ -59,6 +51,29 @@ namespace MediaTekDocuments.dal
 		public static Access GetInstance()
 		{
 			return _instance;
+		}
+
+		public async Task<LoginResponse> Login(string email, string password)
+		{
+			var body = JsonConvert.SerializeObject(new Dictionary<string, string> { { "email", email }, { "password", password } });
+			var res = await this._client.PostAsync("security/login", new StringContent(body, jsonMimeType));
+
+			if (res.StatusCode == System.Net.HttpStatusCode.Forbidden)
+			{
+				var err = this.ParseObject<ApiError>(await res.Content.ReadAsStreamAsync());
+				throw new Exception(err.Messages.Error);
+			}
+			else if (res.StatusCode == System.Net.HttpStatusCode.OK)
+			{
+				var loginRes = this.ParseObject<LoginResponse>(await res.Content.ReadAsStreamAsync());
+
+				return loginRes;
+			}
+			else
+			{
+				res.EnsureSuccessStatusCode();
+				return null; // never returns, always throws
+			}
 		}
 
 		/// <summary>
@@ -120,12 +135,12 @@ namespace MediaTekDocuments.dal
 			return this.ParseObject<Livre>(stream);
 		}
 
-		public async Task<Pixbuf> GetBookImage(Livre l)
+		public async Task<Gdk.Pixbuf> GetBookImage(Livre l)
 		{
 			try
 			{
 				var stream = await this._client.GetStreamAsync(GetImageUrl(l.Image));
-				return new Pixbuf(stream);
+				return new Gdk.Pixbuf(stream);
 			}
 			catch (HttpRequestException e)
 			{

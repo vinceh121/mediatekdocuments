@@ -7,7 +7,7 @@ namespace MediaTekDocuments
     public class Program
     {
         private readonly Application _app;
-        private readonly MainWindow _mainWindow;
+        private readonly LoginDialog _loginDialog;
 
         /// <summary>
         /// Point d'entrée principal de l'application.
@@ -28,13 +28,13 @@ namespace MediaTekDocuments
             this._app = new Application("me.vinceh121.mediatekdocuments", GLib.ApplicationFlags.None);
             this._app.Register(GLib.Cancellable.Current);
 
-            this._mainWindow = new(this);
-            this._app.AddWindow(this._mainWindow);
+            this._loginDialog = new(this);
+            this._app.AddWindow(this._loginDialog);
         }
 
         public void Start()
         {
-            this._mainWindow.ShowAll();
+            this._loginDialog.ShowAll();
             Application.Run();
         }
 
