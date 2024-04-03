@@ -1,0 +1,239 @@
+_type: export
+__export_format: 4
+__export_date: 2024-04-03T19:40:04.890Z
+__export_source: insomnia.desktop.app:v8.3.0
+resources:
+  - _id: req_3aacf8f3a7a74ed59eac3c30d475bcf9
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1712172968451
+    created: 1712113895123
+    url: "{{ _.base_url }}security/login"
+    name: Login Admin
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "admin@org",
+        	"password": "A15T"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1712113895123
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_34c97689307e4124b604e0b932777713
+    parentId: null
+    modified: 1711490756345
+    created: 1711490756345
+    name: Mediatek Documents
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_d7f7a26fdbbb465583b23e617de91498
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1712172979399
+    created: 1712172974842
+    url: "{{ _.base_url }}security/login"
+    name: Login Prêt
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "pret@org",
+        	"password": "A15T"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1711802442102
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7d4c54fbb921492e8b10c78dba723913
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1712173020720
+    created: 1712173017141
+    url: "{{ _.base_url }}security/login"
+    name: Login Culture
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "culture@org",
+        	"password": "A15T"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1711646715591.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9f9c67ad5e1e4311a9c66dbeed7ef540
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1711491045684
+    created: 1711490989081
+    url: "{{ _.base_url }}books"
+    name: Get Books
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1711490989081
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2ea1e26f773d4c33b15eca53432e7a26
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1711819836612
+    created: 1711819832736
+    url: "{{ _.base_url }}genres"
+    name: Get Genres
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1710646949371.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b4a53f5e8b6d4ceda425ffd74519e319
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1711810746649
+    created: 1711810739510
+    url: "{{ _.base_url }}books/00001"
+    name: Get Single Book
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1709802909662
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bedcd8c8eddb4e56867f5fe8b9dd655f
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1712114359800
+    created: 1711810768741
+    url: "{{ _.base_url }}books/00001"
+    name: Update Single Book
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"ISBN": "69",
+        	"titre": "Quand sort la recluse 2"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1708958869952.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_8dd5a41f9ad3f85c9e495a8204b304d502c54622
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1711491025219
+    created: 1711490756348
+    name: Base Environment
+    data:
+      base_url: http://mediatekdocuments.local/api/v1/
+    dataPropertyOrder:
+      "&":
+        - base_url
+    color: null
+    isPrivate: false
+    metaSortKey: 1711490756348
+    _type: environment
+  - _id: jar_8dd5a41f9ad3f85c9e495a8204b304d502c54622
+    parentId: wrk_34c97689307e4124b604e0b932777713
+    modified: 1712172911461
+    created: 1711490756349
+    name: Default Jar
+    cookies:
+      - key: ci_session
+        value: 8h8ecge3tk8segknd9gql74ogs8ul639
+        expires: 2024-04-03T21:35:11.000Z
+        maxAge: 7200
+        domain: mediatekdocuments.local
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2024-04-03T03:11:29.310Z
+        lastAccessed: 2024-04-03T19:35:11.460Z
+        sameSite: lax
+        id: "5616373475659153"
+    _type: cookie_jar
