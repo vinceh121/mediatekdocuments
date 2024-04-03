@@ -37,6 +37,7 @@
             <child>
               <object class="GtkButton" id="_btnLogin">
                 <property name="label" translatable="yes">Connexion</property>
+                <property name="name">_btnLogin</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -90,6 +91,7 @@
             </child>
             <child>
               <object class="GtkEntry" id="_inputPwd">
+                <property name="name">_inputPwd</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="visibility">False</property>
@@ -103,6 +105,7 @@
             </child>
             <child>
               <object class="GtkEntry" id="_inputEmail">
+                <property name="name">_inputEmail</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="input-purpose">email</property>

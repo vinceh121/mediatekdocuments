@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace MediaTekDocuments.Model
 {
     /// <summary>
@@ -15,6 +17,18 @@ namespace MediaTekDocuments.Model
             this.Libelle = libelle;
         }
 
+		public override bool Equals(object obj)
+		{
+			return obj is Categorie categorie &&
+				   Id == categorie.Id &&
+				   Libelle == categorie.Libelle;
+		}
+
+		public override int GetHashCode()
+		{
+			return HashCode.Combine(Id, Libelle);
+		}
+
         /// <summary>
         /// Récupération du libellé pour l'affichage dans les combos
         /// </summary>
@@ -23,6 +37,5 @@ namespace MediaTekDocuments.Model
         {
             return this.Libelle;
         }
-
-    }
+	}
 }

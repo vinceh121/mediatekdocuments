@@ -222,12 +222,12 @@ namespace MediaTekDocuments.dal
 			await this._client.PostAsync("exemplaire", new StringContent(body));
 		}
 
-		private List<T> ParseCollection<T>(Stream stream)
+		public List<T> ParseCollection<T>(Stream stream)
 		{
 			return this._serializer.Deserialize<List<T>>(new JsonTextReader(new StreamReader(stream)));
 		}
 
-		private T ParseObject<T>(Stream stream)
+		public T ParseObject<T>(Stream stream)
 		{
 			return this._serializer.Deserialize<T>(new JsonTextReader(new StreamReader(stream)));
 		}
