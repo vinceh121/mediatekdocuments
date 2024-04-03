@@ -69,6 +69,11 @@ class Books extends ResourceController
     public function update($id = null)
     {
         $body = $this->request->getJSON();
+
+        if (property_exists($body, 'id')) {
+            return $this->fail('id cannot be specified');
+        }
+
         $successBook = $this->model->update($id, $body);
         $successDoc = model(Document::class)->update($id, $body);
 
@@ -96,7 +101,7 @@ class Books extends ResourceController
         $lastId = $this->model->orderBy('livre.id', 'DESC')->first()['id'];
         $newId = sprintf("%'.05d", intval($lastId) + 1);
         $body->id = $newId;
-        
+
         log_message('info', sprintf('creating book with id %s', $newId));
 
         model(Document::class)->insert($body);
