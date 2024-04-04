@@ -1,0 +1,28 @@
+name: Deploy backend API
+
+on:
+  push:
+    branches: [ deploy ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    environment: 
+      name: prod
+      url: https://mediatekdocuments.vinceh121.me
+    steps:
+    - name: multiple command
+      uses: appleboy/ssh-action@v1.0.2
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        script_stop: true
+        script: |
+          cd /var/www/html/cned/mediatekdocuments
+          git pull
+          composer i
+
+          rm -rf doc/html
+          doxygen

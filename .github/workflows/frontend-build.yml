@@ -1,0 +1,46 @@
+name: Frontend build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Debug]
+        os: [windows-latest, ubuntu-latest]
+        dotnetver: [8.x]
+
+    runs-on: ${{matrix.os}}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{matrix.dotnetver}}
+
+    - name: Compile solution
+      working-directory: frontend
+      run: dotnet build -c ${{matrix.configuration}}
+
+    # Execute all unit tests in the solution
+    - name: Execute unit tests
+      working-directory: frontend
+      run: dotnet test
+      
+#    - name: Upload artifacts
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: artifacts-${{matrix.os}}-${{matrix.configuration}}-${{matrix.dotnetver}}
+#        path: bin
