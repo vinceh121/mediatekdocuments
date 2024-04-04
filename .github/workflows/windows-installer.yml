@@ -27,23 +27,23 @@ jobs:
       with:
         dotnet-version: ${{matrix.dotnetver}}
     - name: Install NSIS
-      working-directory: frontend
+      working-directory: frontend/MediaTekDocuments
       run: curl -Lo nsis.exe 'https://downloads.sourceforge.net/project/nsis/NSIS%203/3.08/nsis-3.08-setup.exe' && ./nsis.exe /S
 
     - name: Compile solution
-      working-directory: frontend
+      working-directory: frontend/MediaTekDocuments
       run: dotnet build -c ${{matrix.configuration}}
       
     - name: Download GTK dlls
-      working-directory: frontend
+      working-directory: frontend/MediaTekDocuments
       run: curl -LO https://raw.githubusercontent.com/GtkSharp/Dependencies/master/gtk-3.24.24.zip && mkdir gtk && unzip gtk-3.24.24.zip -d gtk
 
     - name: Build Installer
-      working-directory: frontend
+      working-directory: frontend/MediaTekDocuments
       run: makensis installer.nsi
 
     - name: Release
       uses: softprops/action-gh-release@v1 # apparently the official action for making a GH release is deprecated
       if: startsWith(github.ref, 'refs/tags/') # only for tags
       with:
-        files: frontend/mediatek-installer.exe
+        files: frontend/MediaTekDocuments/mediatek-installer.exe
