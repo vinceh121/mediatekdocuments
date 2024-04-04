@@ -19,11 +19,19 @@ namespace MediaTekDocuments.Dal
 	public class Access
 	{
 		private static readonly MediaTypeHeaderValue jsonMimeType = new("application/json");
+		#if DEBUG
 		private static readonly string imageUri = "http://mediatekdocuments.local/content/";
+		#else
+		private static readonly string imageUri = "https://mediatekdocuments.vinceh121.me/content/";
+		#endif
 		/// <summary>
 		/// adresse de l'API
 		/// </summary>
+		#if DEBUG
 		private static readonly string uriApi = "http://mediatekdocuments.local/api/v1/";
+		#else
+		private static readonly string uriApi = "https://mediatekdocuments.vinceh121.me/api/v1/";
+		#endif
 		/// <summary>
 		/// instance unique de la classe
 		/// </summary>
