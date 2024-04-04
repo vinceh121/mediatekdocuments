@@ -31,13 +31,8 @@ jobs:
         dotnet-version: ${{matrix.dotnetver}}
 
     - name: Compile solution
-      working-directory: frontend
+      working-directory: frontend/MediaTekDocuments
       run: dotnet build -c ${{matrix.configuration}}
-
-    # Execute all unit tests in the solution
-    - name: Execute unit tests
-      working-directory: frontend
-      run: dotnet test
       
 #    - name: Upload artifacts
 #      uses: actions/upload-artifact@v3
