@@ -20,7 +20,7 @@ jobs:
         key: ${{ secrets.KEY }}
         script_stop: true
         script: |
-          cd /var/www/html/cned/mediatekdocuments
+          cd /var/www/html/cned/mediatekdocuments/backend
           git pull
           composer i
 
