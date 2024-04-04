@@ -1,6 +1,6 @@
 using System;
 using Gtk;
-using MediaTekDocuments.dal;
+using MediaTekDocuments.Dal;
 using MediaTekDocuments.Model;
 using UI = Gtk.Builder.ObjectAttribute;
 

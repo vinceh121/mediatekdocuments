@@ -11,7 +11,7 @@ using System.Net.Http.Headers;
 using System.Collections.Concurrent;
 using System.Text.Json.Serialization;
 
-namespace MediaTekDocuments.dal
+namespace MediaTekDocuments.Dal
 {
 	/// <summary>
 	/// Classe d'accès aux données

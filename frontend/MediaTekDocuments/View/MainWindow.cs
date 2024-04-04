@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using Gtk;
-using MediaTekDocuments.dal;
+using MediaTekDocuments.Dal;
 using MediaTekDocuments.Model;
 using UI = Gtk.Builder.ObjectAttribute;
 

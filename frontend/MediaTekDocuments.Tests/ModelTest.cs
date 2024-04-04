@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
-using MediaTekDocuments.dal;
+using MediaTekDocuments.Dal;
 using MediaTekDocuments.Model;
 using Xunit;
 
