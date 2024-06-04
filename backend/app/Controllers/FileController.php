@@ -4,13 +4,16 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Files\File;
+use CodeIgniter\Security\Security;
 
 class FileController extends BaseController
 {
 
-    public function get(string $fileName)
+    public function get(...$pathSegments)
     {
-        return $this->response->download(WRITEPATH . 'uploads/' . $fileName, null, true); // FIXME path traversal
+        $path = implode('/', $pathSegments);
+        $clean = \Config\Services::security()->sanitizeFilename($path, true);
+        return $this->response->download(WRITEPATH . 'uploads/' . $clean, null, true);
     }
 
     public function post()
