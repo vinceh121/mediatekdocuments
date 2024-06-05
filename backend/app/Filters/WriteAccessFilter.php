@@ -27,7 +27,7 @@ class WriteAccessFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if ($request->getMethod() === 'get') {
+        if ($request->getMethod() === 'GET') {
             return;
         }
 
