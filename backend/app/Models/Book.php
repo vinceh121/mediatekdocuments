@@ -42,7 +42,7 @@ class Book extends Model
     
     public function aggregates(): self
     {
-        return $this->select('*, rayon.libelle AS rayon, public.libelle AS public, genre.libelle AS genre, livre.id AS id')
+        return $this->select('document.*, rayon.libelle AS rayon, public.libelle AS public, genre.libelle AS genre, livre.id AS id')
         ->join('document', 'livre.id = document.id')
         ->join('rayon', 'document.idRayon = rayon.id')
         ->join('public', 'document.idPublic = public.id')
