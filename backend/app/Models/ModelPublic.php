@@ -14,7 +14,7 @@ class ModelPublic extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [];
 
-    protected bool $allowEmptyInserts = false;
+    protected bool $allowEmptyInserts = true;
 
     // Dates
     protected $useTimestamps = false;

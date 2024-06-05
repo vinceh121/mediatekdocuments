@@ -8,13 +8,13 @@ class Document extends Model
 {
     protected $table            = 'document';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [ 'id', 'titre', 'image', 'idRayon', 'idPublic', 'idGenre' ];
 
-    protected bool $allowEmptyInserts = false;
+    protected bool $allowEmptyInserts = true;
 
     // Dates
     protected $useTimestamps = false;

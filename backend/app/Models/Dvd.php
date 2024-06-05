@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Book extends Model
+class Dvd extends Model
 {
-    protected $table            = 'livre';
+    protected $table            = 'dvd';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [ 'id', 'ISBN', 'auteur', 'collection' ];
+    protected $allowedFields    = [ 'id', 'synopsis', 'realisateur', 'duree' ];
 
     protected bool $allowEmptyInserts = true;
 
@@ -42,11 +42,11 @@ class Book extends Model
 
     public function aggregates(): self
     {
-        return $this->select('livre.*, document.*, rayon.libelle AS rayon, public.libelle AS public, genre.libelle AS genre, livre.id AS id')
-        ->join('document', 'livre.id = document.id')
+        return $this->select('dvd.*, document.*, rayon.libelle AS rayon, public.libelle AS public, genre.libelle AS genre, dvd.id AS id')
+        ->join('document', 'dvd.id = document.id')
         ->join('rayon', 'document.idRayon = rayon.id')
         ->join('public', 'document.idPublic = public.id')
         ->join('genre', 'document.idGenre = genre.id')
-        ->orderBy('livre.id');
+        ->orderBy('dvd.id');
     }
 }

@@ -11,6 +11,7 @@ $routes->post('content', 'FileController::post');
 
 $routes->group('api/v1', static function ($routes) {
     $routes->resource('books');
+    $routes->resource('dvds');
 
     $routes->resource('genres');
     $routes->resource('publics');

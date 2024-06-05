@@ -14,7 +14,7 @@ class BookDvd extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [ 'id' ];
 
-    protected bool $allowEmptyInserts = false;
+    protected bool $allowEmptyInserts = true;
 
     // Dates
     protected $useTimestamps = false;

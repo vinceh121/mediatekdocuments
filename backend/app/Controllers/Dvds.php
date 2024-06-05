@@ -7,38 +7,39 @@ use CodeIgniter\Model;
 use CodeIgniter\HTTP\IncomingRequest;
 use App\Models\Document;
 use App\Models\BookDvd;
+use App\Models\Dvd;
 
 /**
  *
  * @property IncomingRequest request
  * @property Model model
  */
-class Books extends ResourceController
+class Dvds extends ResourceController
 {
 
     protected $format = 'json';
 
-    protected $modelName = Book::class;
+    protected $modelName = Dvd::class;
 
     public function index()
     {
         /** @var Book $builder */
         $builder = $this->model->aggregates();
 
-        if ($this->request->getGet('author')) {
-            $builder->like('auteur', sprintf('%%%s%%', $this->request->getGet('author')));
+        if ($this->request->getGet('realisateur')) {
+            $builder->like('realisateur', sprintf('%%%s%%', $this->request->getGet('realisateur')));
         }
 
         if ($this->request->getGet('title')) {
             $builder->like('titre', sprintf('%%%s%%', $this->request->getGet('title')));
         }
 
-        if ($this->request->getGet('isbn')) {
-            $builder->like('ISBN', sprintf('%%%s%%', $this->request->getGet('isbn')));
+        if ($this->request->getGet('synopsis')) {
+            $builder->like('synopsis', sprintf('%%%s%%', $this->request->getGet('synopsis')));
         }
 
         if ($this->request->getGet('id')) {
-            $builder->where('livre.id', $this->request->getGet('id'));
+            $builder->where('dvd.id', $this->request->getGet('id'));
         }
 
         if ($this->request->getGet('genre')) {
@@ -74,12 +75,10 @@ class Books extends ResourceController
             return $this->fail('id cannot be specified');
         }
 
-        $successBook = $this->model->update($id, $body);
+        $successDvd = $this->model->update($id, $body);
         $successDoc = model(Document::class)->update($id, $body);
-        
-        dd($successBook, $successDoc);
 
-        if ($successBook && $successDoc) {
+        if ($successDvd && $successDoc) {
             return $this->respondUpdated();
         } else {
             return $this->failNotFound();
@@ -100,7 +99,7 @@ class Books extends ResourceController
             return $this->fail("body can't contain id", 400);
         }
 
-        $lastId = $this->model->orderBy('livre.id', 'DESC')->first()['id'];
+        $lastId = $this->model->orderBy('dvd.id', 'DESC')->first()['id'];
         $newId = sprintf("%'.05d", intval($lastId) + 1);
         $body->id = $newId;
 
