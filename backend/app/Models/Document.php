@@ -39,4 +39,20 @@ class Document extends MyBaseModel
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+    
+    public static function modelOf($id): MyBaseModel
+    {
+        $first = $id[0];
+        
+        switch ($first) {
+            case '0':
+                return model(Book::class);
+            case '1':
+                return null; // TODO revue
+            case '2':
+                return model(Dvd::class);
+            default:
+                throw new \Exception('could not determine document type from id');
+        }
+    }
 }
