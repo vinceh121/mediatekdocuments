@@ -13,6 +13,15 @@ $routes->group('api/v1', static function ($routes) {
     $routes->resource('books');
     $routes->resource('dvds');
 
+    $routes->resource('exemplaires', [
+        'except' => [
+            'show',
+            'update'
+        ]
+    ]);
+    $routes->get('exemplaires/(:segment)/(:segment)', 'Exemplaires::show/$1/$2');
+    $routes->patch('exemplaires/(:segment)/(:segment)', 'Exemplaires::update/$1/$2');
+
     $routes->resource('genres');
     $routes->resource('publics');
     $routes->resource('aisles');
