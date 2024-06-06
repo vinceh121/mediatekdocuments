@@ -18,7 +18,9 @@ class FileController extends BaseController
 
     public function post()
     {
-        $this->request->getFile('photo')->store();
-        return $this->response->appendBody('OK');
+        $path = $this->request->getFile('photo')->store();
+        return $this->response->setStatusCode(201)->setJSON([
+            'path' => $path,
+        ]);
     }
 }
