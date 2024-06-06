@@ -1,7 +1,6 @@
 <?php
 namespace App\Controllers;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\Book;
 use CodeIgniter\Model;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -14,58 +13,13 @@ use App\Models\Dvd;
  * @property IncomingRequest request
  * @property Model model
  */
-class Dvds extends ResourceController
+class Dvds extends MyResourceController
 {
 
-    protected $format = 'json';
-
     protected $modelName = Dvd::class;
-
-    public function index()
-    {
-        /** @var Book $builder */
-        $builder = $this->model->aggregates();
-
-        if ($this->request->getGet('realisateur')) {
-            $builder->like('realisateur', sprintf('%%%s%%', $this->request->getGet('realisateur')));
-        }
-
-        if ($this->request->getGet('title')) {
-            $builder->like('titre', sprintf('%%%s%%', $this->request->getGet('title')));
-        }
-
-        if ($this->request->getGet('synopsis')) {
-            $builder->like('synopsis', sprintf('%%%s%%', $this->request->getGet('synopsis')));
-        }
-
-        if ($this->request->getGet('id')) {
-            $builder->where('dvd.id', $this->request->getGet('id'));
-        }
-
-        if ($this->request->getGet('genre')) {
-            $builder->where('idGenre', $this->request->getGet('genre'));
-        }
-
-        if ($this->request->getGet('public')) {
-            $builder->where('idPublic', $this->request->getGet('public'));
-        }
-
-        if ($this->request->getGet('aisle')) {
-            $builder->where('idRayon', $this->request->getGet('aisle'));
-        }
-
-        return $this->respond($builder->findAll());
-    }
-
-    public function show($id = null)
-    {
-        if (!$id) {
-            return $this->failNotFound();
-        }
-
-        return $this->respond($this->model->aggregates()
-            ->find($id));
-    }
+    
+    protected array $searchFields = [ 'realisateur', 'titre', 'synopsis' ];
+    protected array $fields = [ 'id', 'genre', 'public', 'aisle' ];
 
     public function update($id = null)
     {
@@ -75,20 +29,11 @@ class Dvds extends ResourceController
             return $this->fail('id cannot be specified');
         }
 
-        if (
-            $this->model->update($id, $body)
-            && model(Document::class)->update($id, $body)
-        ) {
+        if ($this->model->update($id, $body) && model(Document::class)->update($id, $body)) {
             return $this->respondUpdated();
         } else {
             return $this->failNotFound();
         }
-    }
-
-    public function delete($id = null)
-    {
-        $this->model->delete($id);
-        return $this->respondDeleted();
     }
 
     public function create()
