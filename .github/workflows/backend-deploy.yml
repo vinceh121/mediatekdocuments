@@ -23,6 +23,7 @@ jobs:
           cd /var/www/html/cned/mediatekdocuments/backend
           git pull
           composer i
+          ./spark migrate
 
           rm -rf doc/html
           doxygen
