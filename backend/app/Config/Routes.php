@@ -16,6 +16,7 @@ $routes->group('api/v1', static function ($routes) {
     $routes->resource('genres');
     $routes->resource('publics');
     $routes->resource('aisles');
+    $routes->resource('states');
 
     $routes->group('security', static function ($routes) {
         $routes->post('login', 'SecurityController::login');
