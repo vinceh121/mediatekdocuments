@@ -42,8 +42,9 @@ class Exemplaire extends MyBaseModel
 
     public function aggregates(): self
     {
-        return $this->select('exemplaire.*, etat.libelle AS etat')
+        return $this->select('exemplaire.*, document.*, etat.libelle AS etat')
         ->join('etat', 'exemplaire.idEtat = etat.id')
+        ->join('document', 'exemplaire.id = document.id')
         ->orderBy('exemplaire.id');
     }
 }

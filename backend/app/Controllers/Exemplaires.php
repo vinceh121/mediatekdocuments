@@ -37,6 +37,11 @@ class Exemplaires extends MyResourceController
             ->where('exemplaire.numero', $numero)
             ->first();
 
+        $targetModel = Document::modelOf($data['id']);
+        $data['document'] = $targetModel->aggregates()
+            ->where($targetModel->getTable() . '.id', $id)
+            ->first();
+
         if ($data) {
             return $this->respond($data);
         } else {
