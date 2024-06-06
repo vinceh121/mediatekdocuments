@@ -29,7 +29,7 @@ class Dvds extends MyResourceController
             return $this->fail('id cannot be specified');
         }
 
-        if ($this->model->update($id, $body) && model(Document::class)->update($id, $body)) {
+        if ($this->model->update($id, $body) || model(Document::class)->update($id, $body)) {
             return $this->respondUpdated();
         } else {
             return $this->failNotFound();

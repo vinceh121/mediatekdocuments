@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Document extends MyBaseModel
+class Revue extends MyBaseModel
 {
-    protected $table            = 'document';
+    protected $table            = 'revue';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [ 'id', 'titre', 'image', 'idRayon', 'idPublic', 'idGenre' ];
+    protected $allowedFields    = [ 'id', 'periodicite', 'delaiMiseADispo' ];
 
     protected bool $allowEmptyInserts = true;
 
@@ -39,20 +39,21 @@ class Document extends MyBaseModel
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    protected array $casts = [
+        'periodicite' => 'periodicite',
+    ];
+    protected array $castHandlers = [
+        'periodicite' => PeriodiciteCast::class,
+    ];
     
-    public static function modelOf($id): MyBaseModel
+    public function aggregates(): self
     {
-        $first = $id[0];
-        
-        switch ($first) {
-            case '0':
-                return model(Book::class);
-            case '1':
-                return model(Revue::class);
-            case '2':
-                return model(Dvd::class);
-            default:
-                throw new \Exception('could not determine document type from id');
-        }
+        return $this->select('revue.*, document.*, rayon.libelle AS rayon, public.libelle AS public, genre.libelle AS genre, revue.id AS id')
+        ->join('document', 'revue.id = document.id')
+        ->join('rayon', 'document.idRayon = rayon.id')
+        ->join('public', 'document.idPublic = public.id')
+        ->join('genre', 'document.idGenre = genre.id')
+        ->orderBy('revue.id');
     }
 }

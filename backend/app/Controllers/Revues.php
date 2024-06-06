@@ -1,23 +1,34 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\Book;
 use CodeIgniter\Model;
 use CodeIgniter\HTTP\IncomingRequest;
 use App\Models\Document;
 use App\Models\BookDvd;
+use App\Models\Revue;
 
 /**
  *
  * @property IncomingRequest request
  * @property Model model
  */
-class Books extends MyResourceController
+class Revues extends MyResourceController
 {
 
-    protected $modelName = Book::class;
-    protected array $searchFields = [ 'auteur', 'titre', 'ISBN' ];
-    protected array $fields = [ 'id', 'idGenre', 'idPublic', 'idRayon' ];
+    protected $modelName = Revue::class;
+
+    protected array $searchFields = [
+        'titre'
+    ];
+
+    protected array $fields = [
+        'id',
+        'periodicite',
+        'delaiMiseADispo',
+        'idGenre',
+        'idPublic',
+        'idRayon'
+    ];
 
     public function update($id = null)
     {
@@ -27,10 +38,7 @@ class Books extends MyResourceController
             return $this->fail('id cannot be specified');
         }
 
-        if (
-            $this->model->update($id, $body)
-            || model(Document::class)->update($id, $body)
-        ) {
+        if ($this->model->update($id, $body) || model(Document::class)->update($id, $body)) {
             return $this->respondUpdated();
         } else {
             return $this->failNotFound();
@@ -45,14 +53,13 @@ class Books extends MyResourceController
             return $this->fail("body can't contain id", 400);
         }
 
-        $lastId = $this->model->orderBy('livre.id', 'DESC')->first()['id'];
+        $lastId = $this->model->orderBy('revue.id', 'DESC')->first()['id'];
         $newId = sprintf("%'.05d", intval($lastId) + 1);
         $body->id = $newId;
 
-        log_message('info', sprintf('creating book with id %s', $newId));
+        log_message('info', sprintf('creating revue with id %s', $newId));
 
         model(Document::class)->insert($body);
-        model(BookDvd::class)->insert($body);
         $this->model->insert($body);
     }
 }
