@@ -4,23 +4,23 @@ namespace App\Controllers;
 use CodeIgniter\Model;
 use CodeIgniter\HTTP\IncomingRequest;
 use App\Models\Order;
-use App\Models\BookDvdOrder;
+use App\Models\Subscription;
 
 /**
  *
  * @property IncomingRequest request
  * @property Model model
  */
-class BookDvdOrders extends MyResourceController
+class Subscriptions extends MyResourceController
 {
     const DATE_FORMAT = 'Y-m-d';
 
-    protected $modelName = BookDvdOrder::class;
+    protected $modelName = Subscription::class;
     protected array $searchFields = [];
     protected array $fields = [
         'id',
-        'nbExemplaire',
-        'idLivreDvd',
+        'idRevue',
+        'dateFinAbonnement',
         'dateCommande',
         'montant'
     ];
@@ -53,6 +53,10 @@ class BookDvdOrders extends MyResourceController
         }
 
         $body->dateCommande = (new \DateTime())->format(self::DATE_FORMAT);
+
+        if (property_exists($body, 'dateFinAbonnement') && !\DateTime::createFromFormat(self::DATE_FORMAT, $body->dateFinAbonnement)) {
+            return $this->failValidationErrors('dateFinAbonnement is an invalid date');
+        }
 
         $last = model(Order::class)->orderBy('commande.id', 'DESC')->first();
 

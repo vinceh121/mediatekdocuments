@@ -13,6 +13,7 @@ $routes->group('api/v1', static function ($routes) {
     $routes->resource('books');
     $routes->resource('dvds');
     $routes->resource('revues');
+    $routes->resource('subscriptions');
     $routes->resource('bookdvdorders', [
         'controller' => 'BookDvdOrders'
     ]);
