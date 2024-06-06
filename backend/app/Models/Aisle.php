@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Aisle extends Model
+class Aisle extends MyBaseModel
 {
     protected $table            = 'rayon';
     protected $primaryKey       = 'id';

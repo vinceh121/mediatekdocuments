@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Dvd extends Model
+class Dvd extends MyBaseModel
 {
     protected $table            = 'dvd';
     protected $primaryKey       = 'id';

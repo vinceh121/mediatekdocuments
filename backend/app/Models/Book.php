@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Book extends Model
+class Book extends MyBaseModel
 {
     protected $table            = 'livre';
     protected $primaryKey       = 'id';

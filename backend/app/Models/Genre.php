@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Genre extends Model
+class Genre extends MyBaseModel
 {
     protected $table            = 'genre';
     protected $primaryKey       = 'id';

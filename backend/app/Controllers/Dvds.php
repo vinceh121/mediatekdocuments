@@ -75,10 +75,10 @@ class Dvds extends ResourceController
             return $this->fail('id cannot be specified');
         }
 
-        $successDvd = $this->model->update($id, $body);
-        $successDoc = model(Document::class)->update($id, $body);
-
-        if ($successDvd && $successDoc) {
+        if (
+            $this->model->update($id, $body)
+            && model(Document::class)->update($id, $body)
+        ) {
             return $this->respondUpdated();
         } else {
             return $this->failNotFound();

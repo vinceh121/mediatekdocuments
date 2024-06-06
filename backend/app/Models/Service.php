@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Service extends Model
+class Service extends MyBaseModel
 {
     const ADMIN = 1;
     const LOAN = 2;

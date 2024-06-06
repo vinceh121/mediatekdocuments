@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelPublic extends Model
+class ModelPublic extends MyBaseModel
 {
     protected $table            = 'public';
     protected $primaryKey       = 'id';

@@ -74,12 +74,10 @@ class Books extends ResourceController
             return $this->fail('id cannot be specified');
         }
 
-        $successBook = $this->model->update($id, $body);
-        $successDoc = model(Document::class)->update($id, $body);
-        
-        dd($successBook, $successDoc);
-
-        if ($successBook && $successDoc) {
+        if (
+            $this->model->update($id, $body)
+            && model(Document::class)->update($id, $body)
+        ) {
             return $this->respondUpdated();
         } else {
             return $this->failNotFound();
