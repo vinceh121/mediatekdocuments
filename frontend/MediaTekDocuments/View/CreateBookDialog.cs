@@ -38,9 +38,9 @@ namespace MediaTekDocuments.View
             this._btnCancel.Clicked += (_, _) => Application.Quit();
             this._btnCreate.Clicked += (_, _) => this.CreateBook();
 
-            this.FillAisles();
-            this.FillPublics();
-            this.FillGenres();
+            Utils.FillEnum(Access.GetInstance().Aisles(), this._comboAisle);
+            Utils.FillEnum(Access.GetInstance().Publics(), this._comboPublic);
+            Utils.FillEnum(Access.GetInstance().Genres(), this._comboGenre);
         }
 
         private async void CreateBook()
@@ -61,54 +61,6 @@ namespace MediaTekDocuments.View
             await Access.GetInstance().Books().Create(l);
 
             this.Destroy();
-        }
-
-        private async void FillAisles()
-        {
-            var aisles = await Access.GetInstance().Aisles().Get();
-            ListStore aislesModel = new(GLib.GType.String, GLib.GType.String);
-            aislesModel.AppendValues(null, null);
-
-            foreach (Rayon r in aisles)
-            {
-                aislesModel.AppendValues(r.Id, r.Libelle);
-            }
-
-            this._comboAisle.Model = aislesModel;
-
-            MainWindow.SetComboboxTextRenderer(this._comboAisle);
-        }
-
-        private async void FillPublics()
-        {
-            var publics = await Access.GetInstance().Publics().Get();
-            ListStore publicsModel = new(GLib.GType.String, GLib.GType.String);
-            publicsModel.AppendValues(null, null);
-
-            foreach (Public p in publics)
-            {
-                publicsModel.AppendValues(p.Id, p.Libelle);
-            }
-
-            this._comboPublic.Model = publicsModel;
-
-            MainWindow.SetComboboxTextRenderer(this._comboPublic);
-        }
-
-        private async void FillGenres()
-        {
-            var genres = await Access.GetInstance().Genres().Get();
-            ListStore genresModel = new(GLib.GType.String, GLib.GType.String);
-            genresModel.AppendValues(null, null);
-
-            foreach (Genre g in genres)
-            {
-                genresModel.AppendValues(g.Id, g.Libelle);
-            }
-
-            this._comboGenre.Model = genresModel;
-
-            MainWindow.SetComboboxTextRenderer(this._comboGenre);
         }
     }
 }

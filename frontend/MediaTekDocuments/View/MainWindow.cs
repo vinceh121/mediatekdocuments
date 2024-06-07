@@ -108,62 +108,11 @@ namespace MediaTekDocuments.View
                     .ForEach(e => e.Changed += (_, _) => { this._btnUpdateBook.Sensitive = true; });
             }
 
-            this.FillAisles();
-            this.FillPublics();
-            this.FillGenres();
+            Utils.FillEnum(Access.GetInstance().Aisles(), this._aisleCombo, this._bookAisle);
+            Utils.FillEnum(Access.GetInstance().Publics(), this._publicCombo, this._bookPublic);
+            Utils.FillEnum(Access.GetInstance().Genres(), this._genreCombo, this._bookGenre);
             this.FillBookColumns();
             this.FillBooks();
-        }
-
-        private async void FillAisles()
-        {
-            var aisles = await Access.GetInstance().Aisles().Get();
-            ListStore aislesModel = new(GLib.GType.String, GLib.GType.String);
-            aislesModel.AppendValues(null, null);
-
-            foreach (Rayon r in aisles)
-            {
-                aislesModel.AppendValues(r.Id, r.Libelle);
-            }
-
-            this._aisleCombo.Model = this._bookAisle.Model = aislesModel;
-
-            SetComboboxTextRenderer(this._aisleCombo);
-            SetComboboxTextRenderer(this._bookAisle);
-        }
-
-        private async void FillPublics()
-        {
-            var publics = await Access.GetInstance().Publics().Get();
-            ListStore publicsModel = new(GLib.GType.String, GLib.GType.String);
-            publicsModel.AppendValues(null, null);
-
-            foreach (Public p in publics)
-            {
-                publicsModel.AppendValues(p.Id, p.Libelle);
-            }
-
-            this._publicCombo.Model = this._bookPublic.Model = publicsModel;
-
-            SetComboboxTextRenderer(this._publicCombo);
-            SetComboboxTextRenderer(this._bookPublic);
-        }
-
-        private async void FillGenres()
-        {
-            var genres = await Access.GetInstance().Genres().Get();
-            ListStore genresModel = new(GLib.GType.String, GLib.GType.String);
-            genresModel.AppendValues(null, null);
-
-            foreach (Genre g in genres)
-            {
-                genresModel.AppendValues(g.Id, g.Libelle);
-            }
-
-            this._genreCombo.Model = this._bookGenre.Model = genresModel;
-
-            SetComboboxTextRenderer(this._genreCombo);
-            SetComboboxTextRenderer(this._bookGenre);
         }
 
         private void FillBookColumns()
@@ -313,18 +262,6 @@ namespace MediaTekDocuments.View
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
         {
             Application.Quit();
-        }
-
-        public static void SetComboboxTextRenderer(ComboBox cbx)
-        {
-            CellRendererText txtRender = new();
-            cbx.PackStart(txtRender, true);
-            cbx.SetAttributes(txtRender, "id", 0);
-            cbx.AddAttribute(txtRender, "text", 1);
-
-            cbx.Active = 0;
-
-            cbx.Sensitive = true;
         }
     }
 }
