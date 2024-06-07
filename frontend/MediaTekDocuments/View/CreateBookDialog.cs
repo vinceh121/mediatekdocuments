@@ -58,14 +58,14 @@ namespace MediaTekDocuments.View
                 this._comboAisle.ActiveId,
                 null);
 
-            await Access.GetInstance().CreateBook(l);
+            await Access.GetInstance().Books().Create(l);
 
             this.Destroy();
         }
 
         private async void FillAisles()
         {
-            var aisles = await Access.GetInstance().GetAllRayons();
+            var aisles = await Access.GetInstance().Aisles().Get();
             ListStore aislesModel = new(GLib.GType.String, GLib.GType.String);
             aislesModel.AppendValues(null, null);
 
@@ -81,7 +81,7 @@ namespace MediaTekDocuments.View
 
         private async void FillPublics()
         {
-            var publics = await Access.GetInstance().GetAllPublics();
+            var publics = await Access.GetInstance().Publics().Get();
             ListStore publicsModel = new(GLib.GType.String, GLib.GType.String);
             publicsModel.AppendValues(null, null);
 
@@ -97,7 +97,7 @@ namespace MediaTekDocuments.View
 
         private async void FillGenres()
         {
-            var genres = await Access.GetInstance().GetAllGenres();
+            var genres = await Access.GetInstance().Genres().Get();
             ListStore genresModel = new(GLib.GType.String, GLib.GType.String);
             genresModel.AppendValues(null, null);
 

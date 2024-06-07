@@ -117,7 +117,7 @@ namespace MediaTekDocuments.View
 
         private async void FillAisles()
         {
-            var aisles = await Access.GetInstance().GetAllRayons();
+            var aisles = await Access.GetInstance().Aisles().Get();
             ListStore aislesModel = new(GLib.GType.String, GLib.GType.String);
             aislesModel.AppendValues(null, null);
 
@@ -134,7 +134,7 @@ namespace MediaTekDocuments.View
 
         private async void FillPublics()
         {
-            var publics = await Access.GetInstance().GetAllPublics();
+            var publics = await Access.GetInstance().Publics().Get();
             ListStore publicsModel = new(GLib.GType.String, GLib.GType.String);
             publicsModel.AppendValues(null, null);
 
@@ -151,7 +151,7 @@ namespace MediaTekDocuments.View
 
         private async void FillGenres()
         {
-            var genres = await Access.GetInstance().GetAllGenres();
+            var genres = await Access.GetInstance().Genres().Get();
             ListStore genresModel = new(GLib.GType.String, GLib.GType.String);
             genresModel.AppendValues(null, null);
 
@@ -207,7 +207,7 @@ namespace MediaTekDocuments.View
                 filters.Add("aisle", this._aisleCombo.ActiveId);
             }
 
-            var books = await Access.GetInstance().GetLivres(filters);
+            var books = await Access.GetInstance().Books().Get(filters);
 
             ListStore model = new(GLib.GType.String, GLib.GType.String, GLib.GType.String, GLib.GType.String, GLib.GType.String, GLib.GType.String, GLib.GType.String);
             this._bookList.Model = model;
@@ -228,7 +228,7 @@ namespace MediaTekDocuments.View
 
         private async void SelectBook(string id)
         {
-            Livre livre = await Access.GetInstance().GetBook(id);
+            Livre livre = await Access.GetInstance().Books().Get(id);
 
             this._bookId.Text = livre.Id;
             this._bookTitle.Text = livre.Titre;
@@ -241,7 +241,7 @@ namespace MediaTekDocuments.View
             this._bookIsbn.Text = livre.Isbn;
 
             this._bookImage.Clear();
-            var image = await Access.GetInstance().GetBookImage(livre);
+            var image = await Access.GetInstance().FetchImage(livre.Image);
 
             if (image != null)
             {
@@ -273,7 +273,7 @@ namespace MediaTekDocuments.View
                 { "idGenre", this._bookGenre.ActiveId },
             };
 
-            await Access.GetInstance().UpdateBook(this._bookId.Text, parameters);
+            await Access.GetInstance().Books().Update(this._bookId.Text, parameters);
 
             this._btnUpdateBook.Sensitive = false;
             this.FillBooks();
@@ -295,7 +295,7 @@ namespace MediaTekDocuments.View
 
                 if (args.ResponseId == ResponseType.Yes)
                 {
-                    await Access.GetInstance().DeleteBook(this._bookId.Text);
+                    await Access.GetInstance().Books().Delete(this._bookId.Text);
                     this.FillBooks();
                 }
             };
