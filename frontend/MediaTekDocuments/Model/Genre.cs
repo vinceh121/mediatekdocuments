@@ -4,11 +4,7 @@ namespace MediaTekDocuments.Model
     /// <summary>
     /// Classe métier Genre : hérite de Categorie
     /// </summary>
-    public class Genre : Categorie
+    public class Genre(string id, string libelle) : Categorie(id, libelle)
     {
-        public Genre(string id, string libelle) : base(id, libelle)
-        {
-        }
-
-    }
+	}
 }
