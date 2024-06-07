@@ -1,13 +1,13 @@
 _type: export
 __export_format: 4
-__export_date: 2024-04-03T19:40:04.890Z
+__export_date: 2024-06-06T21:05:17.103Z
 __export_source: insomnia.desktop.app:v8.3.0
 resources:
-  - _id: req_3aacf8f3a7a74ed59eac3c30d475bcf9
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1712172968451
+  - _id: req_15b7aba38d644d30bb65cdee614ec7a7
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717592815585
     created: 1712113895123
-    url: "{{ _.base_url }}security/login"
+    url: "{{ _.base_url }}/security/login"
     name: Login Admin
     description: ""
     method: POST
@@ -34,19 +34,19 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: wrk_34c97689307e4124b604e0b932777713
+  - _id: wrk_0ccc3840f0b44f4ea32439ad55d926a0
     parentId: null
-    modified: 1711490756345
-    created: 1711490756345
+    modified: 1717529559254
+    created: 1717529559254
     name: Mediatek Documents
     description: ""
     scope: collection
     _type: workspace
-  - _id: req_d7f7a26fdbbb465583b23e617de91498
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1712172979399
+  - _id: req_3c8ce026b02a4b59b67f1588fca5ceb2
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717592810806
     created: 1712172974842
-    url: "{{ _.base_url }}security/login"
+    url: "{{ _.base_url }}/security/login"
     name: Login Prêt
     description: ""
     method: POST
@@ -73,11 +73,11 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_7d4c54fbb921492e8b10c78dba723913
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1712173020720
+  - _id: req_c70cf1ebe2d74dbb82d19b7870b4b49a
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717592807188
     created: 1712173017141
-    url: "{{ _.base_url }}security/login"
+    url: "{{ _.base_url }}/security/login"
     name: Login Culture
     description: ""
     method: POST
@@ -104,11 +104,11 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_9f9c67ad5e1e4311a9c66dbeed7ef540
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1711491045684
+  - _id: req_e36f434921e141a9875f32e52bf2fafa
+    parentId: fld_2b5a46361c764dda830b84e9261114ed
+    modified: 1717596082120
     created: 1711490989081
-    url: "{{ _.base_url }}books"
+    url: "{{ _.base_url }}/books"
     name: Get Books
     description: ""
     method: GET
@@ -118,7 +118,7 @@ resources:
       - name: User-Agent
         value: insomnia/8.3.0
     authentication: {}
-    metaSortKey: -1711490989081
+    metaSortKey: -1717596082077
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -127,12 +127,22 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_2ea1e26f773d4c33b15eca53432e7a26
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1711819836612
-    created: 1711819832736
-    url: "{{ _.base_url }}genres"
-    name: Get Genres
+  - _id: fld_2b5a46361c764dda830b84e9261114ed
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717596078583
+    created: 1717596070573
+    name: Books
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1711568852336.25
+    _type: request_group
+  - _id: req_9d55c7edd038437b8ca73d692e5db101
+    parentId: fld_2b5a46361c764dda830b84e9261114ed
+    modified: 1717629322777
+    created: 1717629280479
+    url: "{{ _.base_url }}/books?author=Edgar"
+    name: Search Books
     description: ""
     method: GET
     body: {}
@@ -141,7 +151,7 @@ resources:
       - name: User-Agent
         value: insomnia/8.3.0
     authentication: {}
-    metaSortKey: -1710646949371.5
+    metaSortKey: -1717596082027
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -150,11 +160,11 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_b4a53f5e8b6d4ceda425ffd74519e319
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1711810746649
+  - _id: req_f67942abd4fc476692a2280b487665da
+    parentId: fld_2b5a46361c764dda830b84e9261114ed
+    modified: 1717596086025
     created: 1711810739510
-    url: "{{ _.base_url }}books/00001"
+    url: "{{ _.base_url }}/books/00001"
     name: Get Single Book
     description: ""
     method: GET
@@ -164,7 +174,7 @@ resources:
       - name: User-Agent
         value: insomnia/8.3.0
     authentication: {}
-    metaSortKey: -1709802909662
+    metaSortKey: -1717596081977
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -173,11 +183,11 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_bedcd8c8eddb4e56867f5fe8b9dd655f
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1712114359800
+  - _id: req_3ebc088d1a5044638eb5b248af396f3c
+    parentId: fld_2b5a46361c764dda830b84e9261114ed
+    modified: 1717605801418
     created: 1711810768741
-    url: "{{ _.base_url }}books/00001"
+    url: "{{ _.base_url }}/books/00001"
     name: Update Single Book
     description: ""
     method: PATCH
@@ -185,8 +195,7 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"ISBN": "69",
-        	"titre": "Quand sort la recluse 2"
+        	"ISBN": "69"
         }
     parameters: []
     headers:
@@ -195,7 +204,7 @@ resources:
       - name: User-Agent
         value: insomnia/8.3.0
     authentication: {}
-    metaSortKey: -1708958869952.5
+    metaSortKey: -1717596081877
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -204,23 +213,805 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: env_8dd5a41f9ad3f85c9e495a8204b304d502c54622
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1711491025219
+  - _id: req_329317787af84fc3abdef330bf83f2fe
+    parentId: fld_535473a40996484aaf8f05b550627b5a
+    modified: 1717596117525
+    created: 1717596003179
+    url: "{{ _.base_url }}/dvds"
+    name: Get DVDs
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117475
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_535473a40996484aaf8f05b550627b5a
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717596115867
+    created: 1717596111523
+    name: DVDs
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1710541444395.3125
+    _type: request_group
+  - _id: req_fd30fd443ff843e19c4a9969df63c0ff
+    parentId: fld_535473a40996484aaf8f05b550627b5a
+    modified: 1717635260447
+    created: 1717635245069
+    url: "{{ _.base_url }}/dvds?synopsis=Yoda"
+    name: Search DVDs
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117425
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_02833bd7647b45148a1cfb04e031e827
+    parentId: fld_535473a40996484aaf8f05b550627b5a
+    modified: 1717681875541
+    created: 1717596126189
+    url: "{{ _.base_url }}/dvds/20001"
+    name: Get Single DVD
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3eb573846aa24d2d947ef471c900e424
+    parentId: fld_535473a40996484aaf8f05b550627b5a
+    modified: 1717635487337
+    created: 1717596147974
+    url: "{{ _.base_url }}/dvds/20001"
+    name: Update Single DVD
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"titre": "Star Wars 5 L'empire contre attaque lol",
+        	"synopsis": "Luc est entraîné par Yoda pendant que Han et Leia tentent de se cacher dans la cité des nuages. lol"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117275
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c1ae328000054037bb133968e4ffefc6
+    parentId: fld_c9b88b889e2b4ad4971c44422fff4928
+    modified: 1717684632320
+    created: 1717684624330
+    url: "{{ _.base_url }}/revues"
+    name: Get Revues
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117475
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_c9b88b889e2b4ad4971c44422fff4928
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717684624327
+    created: 1717684624327
+    name: Revues
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1710409563187.5781
+    _type: request_group
+  - _id: req_c09f3ebe94574804b9e591bda55ebc2f
+    parentId: fld_c9b88b889e2b4ad4971c44422fff4928
+    modified: 1717684744352
+    created: 1717684624339
+    url: "{{ _.base_url }}/revues?titre=Arts"
+    name: Search Revues
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117425
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_38dc860f4f654760ac57d2c39308623e
+    parentId: fld_c9b88b889e2b4ad4971c44422fff4928
+    modified: 1717684955827
+    created: 1717684624334
+    url: "{{ _.base_url }}/revues/10001"
+    name: Get Revue
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4c260725a81d46c3bbbe45127ac88335
+    parentId: fld_c9b88b889e2b4ad4971c44422fff4928
+    modified: 1717687733088
+    created: 1717684624337
+    url: "{{ _.base_url }}/revues/10001"
+    name: Update Revue
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"titre": "Arts Magazine",
+        	"periodicite": "QT"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117275
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b6e1d70084e24dd3a9788d8360f431ad
+    parentId: fld_30bd80a4c52b4529bfc0573684cfd3bc
+    modified: 1717679280509
+    created: 1717679258354
+    url: "{{ _.base_url }}/exemplaires"
+    name: Get Exemplaires
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117475
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_30bd80a4c52b4529bfc0573684cfd3bc
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717679258348
+    created: 1717679258348
+    name: Exemplaires
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1710277681979.8438
+    _type: request_group
+  - _id: req_27e016a31e2549bc9d24cf980d807cb4
+    parentId: fld_30bd80a4c52b4529bfc0573684cfd3bc
+    modified: 1717681342492
+    created: 1717679258366
+    url: "{{ _.base_url }}/exemplaires?numero=3237"
+    name: Search Exemplaires
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117425
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b35dda001cca417fadbcab1eb05c4c07
+    parentId: fld_30bd80a4c52b4529bfc0573684cfd3bc
+    modified: 1717682750309
+    created: 1717679258360
+    url: "{{ _.base_url }}/exemplaires/10002/418"
+    name: Get Single Exemplaire
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_995b4854eaf94b21abc3872ee3baa615
+    parentId: fld_30bd80a4c52b4529bfc0573684cfd3bc
+    modified: 1717683103289
+    created: 1717679258364
+    url: "{{ _.base_url }}/exemplaires/10002/418"
+    name: Update Single DVD
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"idEtat": "00003"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117275
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_30efc25a7ed9472c9297f73ef3c0e593
+    parentId: fld_eb36972af20f4222ac2550a3314e4d75
+    modified: 1717695918112
+    created: 1717694152952
+    url: "{{ _.base_url }}/bookdvdorders"
+    name: Get Book/DVD Orders
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117475
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_eb36972af20f4222ac2550a3314e4d75
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717694152951
+    created: 1717694152951
+    name: Document Order
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1710145800772.1094
+    _type: request_group
+  - _id: req_cb7671bc3d304a048f217c0390d4c136
+    parentId: fld_eb36972af20f4222ac2550a3314e4d75
+    modified: 1717700259479
+    created: 1717694152955
+    url: "{{ _.base_url }}/bookdvdorders?montant=69"
+    name: Search Order
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117425
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_45d0908214cd4040b9a1ea61cedc3111
+    parentId: fld_eb36972af20f4222ac2550a3314e4d75
+    modified: 1717701009622
+    created: 1717694152953
+    url: "{{ _.base_url }}/bookdvdorders/00000"
+    name: Get Book/DVD Order
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e5f78882aae144f7b9e5d956923a60f8
+    parentId: fld_eb36972af20f4222ac2550a3314e4d75
+    modified: 1717706553170
+    created: 1717694152954
+    url: "{{ _.base_url }}/bookdvdorders/00000"
+    name: Update Order
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nbExemplaire": 2
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117275
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6067763a31914ab6978ba42d3d2cd3a9
+    parentId: fld_eb36972af20f4222ac2550a3314e4d75
+    modified: 1717696648362
+    created: 1717696199715
+    url: "{{ _.base_url }}/bookdvdorders"
+    name: Create Book/DVD Order
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"montant": 69,
+        	"nbExemplaire": 1,
+        	"idLivreDvd": "20001"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596108905.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c76e798436f04b049ba47ac543cf0bd3
+    parentId: fld_6b5c912dcead44ea97dd969cd2ec6eda
+    modified: 1717703396591
+    created: 1717703383135
+    url: "{{ _.base_url }}/subscriptions"
+    name: Get Subscriptions
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117475
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_6b5c912dcead44ea97dd969cd2ec6eda
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717703383134
+    created: 1717703383134
+    name: Subscriptions
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1710079860168.2422
+    _type: request_group
+  - _id: req_4ac058283342470ab33c6b8725423ea4
+    parentId: fld_6b5c912dcead44ea97dd969cd2ec6eda
+    modified: 1717707467819
+    created: 1717703383144
+    url: "{{ _.base_url }}/subscriptions?montant=69"
+    name: Search Subscription
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117425
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_babd28611ec64cd6a2bf3af72848788d
+    parentId: fld_6b5c912dcead44ea97dd969cd2ec6eda
+    modified: 1717706696791
+    created: 1717703383139
+    url: "{{ _.base_url }}/subscriptions/00003"
+    name: Get Subscription
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4bd828d207dc463eafed36f134b88acf
+    parentId: fld_6b5c912dcead44ea97dd969cd2ec6eda
+    modified: 1717706571045
+    created: 1717703383142
+    url: "{{ _.base_url }}/subscription/00003"
+    name: Update Subscription
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nbExemplaire": 2
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596117275
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2980bb2df953422099f99daad35aca5b
+    parentId: fld_6b5c912dcead44ea97dd969cd2ec6eda
+    modified: 1717705072881
+    created: 1717703383145
+    url: "{{ _.base_url }}/subscriptions"
+    name: Create Subscription
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"dateFinAbonnement": "2024-06-06",
+        	"idRevue": "10001"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596108905.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a14f9dfbb0cc43668925bcb4bae974ef
+    parentId: fld_0b220e7b0ba84c2fb5b422ceb8ca568e
+    modified: 1717678152270
+    created: 1711819832736
+    url: "{{ _.base_url }}/genres"
+    name: Get Genres
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596100536
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_0b220e7b0ba84c2fb5b422ceb8ca568e
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717596098738
+    created: 1717596096428
+    name: Enums
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1710013919564.375
+    _type: request_group
+  - _id: req_f66f2a3b9a12450f991b7f3b034b9cba
+    parentId: fld_0b220e7b0ba84c2fb5b422ceb8ca568e
+    modified: 1717635568107
+    created: 1717635565096
+    url: "{{ _.base_url }}/publics"
+    name: Get Publics
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596091306.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_af839e50b4a24971842c70687403a4cd
+    parentId: fld_0b220e7b0ba84c2fb5b422ceb8ca568e
+    modified: 1717677674348
+    created: 1717635634867
+    url: "{{ _.base_url }}/aisles"
+    name: Get Aisles
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596086691.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_451900c181af4ef1b0c5c5e5c95cf0ac
+    parentId: fld_0b220e7b0ba84c2fb5b422ceb8ca568e
+    modified: 1717677720515
+    created: 1717677664041
+    url: "{{ _.base_url }}/states"
+    name: Get States
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1717596084384.375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_49594bfa169c41249152c5e9ef6a778c
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717530689407
+    created: 1717530256944
+    url: "{{ _.root_url }}/content"
+    name: Upload file
+    description: ""
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_877bcb88dd11457c98528d41863dfbbb
+          name: photo
+          value: ""
+          description: ""
+          type: file
+          fileName: /home/vincent/Pictures/santa.png
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1708958869852.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a17de1270e8645f88d3605a2c89ebd13
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717530994182
+    created: 1717530712936
+    url: "{{ _.root_url }}/content/20240604/1717530690_ca72f5990018a2bcd3ab.png"
+    name: Get file
+    description: ""
+    method: GET
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_877bcb88dd11457c98528d41863dfbbb
+          name: photo
+          value: ""
+          description: ""
+          type: file
+          fileName: /home/vincent/Pictures/santa.png
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/8.3.0
+    authentication: {}
+    metaSortKey: -1708536850047.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_5a22bf6c81244441af6cada57f178388
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717530525998
     created: 1711490756348
     name: Base Environment
     data:
-      base_url: http://mediatekdocuments.local/api/v1/
+      host: mediatekdocuments.local
+      root_url: http://{{_.host}}
+      base_url: "{{ _.root_url }}/api/v1"
     dataPropertyOrder:
       "&":
+        - host
+        - root_url
         - base_url
     color: null
     isPrivate: false
     metaSortKey: 1711490756348
     _type: environment
-  - _id: jar_8dd5a41f9ad3f85c9e495a8204b304d502c54622
-    parentId: wrk_34c97689307e4124b604e0b932777713
-    modified: 1712172911461
+  - _id: jar_4761b3aa2c0a4dbb94bd8cbc2d785662
+    parentId: wrk_0ccc3840f0b44f4ea32439ad55d926a0
+    modified: 1717707335605
     created: 1711490756349
     name: Default Jar
     cookies:
@@ -235,5 +1026,69 @@ resources:
         creation: 2024-04-03T03:11:29.310Z
         lastAccessed: 2024-04-03T19:35:11.460Z
         sameSite: lax
-        id: "5616373475659153"
+        id: "1601929745252504"
+      - key: ci_session
+        value: vugc3o47kjo2iparm1k9oajtj4pqfcaj
+        expires: 2024-06-06T22:55:35.000Z
+        maxAge: 7200
+        domain: localhost
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2024-06-04T19:43:22.855Z
+        lastAccessed: 2024-06-06T20:55:35.605Z
+        sameSite: lax
+        id: "7448563263871257"
+      - key: csrf_cookie_name
+        value: af3cb75efdfc471c70b728ddeeb57656
+        expires: 2024-06-04T21:55:42.000Z
+        maxAge: 7200
+        domain: localhost
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2024-06-04T19:55:42.245Z
+        lastAccessed: 2024-06-04T19:55:42.245Z
+        sameSite: lax
+        id: "7225628119579495"
+      - key: ci_session
+        value: 0q1oslci13aeoqtgm9rppp3vpmqbrv0e
+        expires: 2024-06-06T03:04:34.000Z
+        maxAge: 7200
+        domain: mediatekdocuments.vinceh121.me
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2024-06-04T20:29:14.778Z
+        lastAccessed: 2024-06-06T01:04:34.209Z
+        sameSite: lax
+        id: "05847931312658394"
     _type: cookie_jar
+  - _id: env_386395003e7245fca8763ae5e6b27fc9
+    parentId: env_5a22bf6c81244441af6cada57f178388
+    modified: 1717532940196
+    created: 1717530171189
+    name: spark serve
+    data:
+      host: localhost:8080
+    dataPropertyOrder:
+      "&":
+        - host
+    color: "#089111"
+    isPrivate: false
+    metaSortKey: 1717530171189
+    _type: environment
+  - _id: env_c8947fdb9ddd4178b8451e04a1a28017
+    parentId: env_5a22bf6c81244441af6cada57f178388
+    modified: 1717532950823
+    created: 1717532926041
+    name: Production
+    data:
+      host: mediatekdocuments.vinceh121.me
+    dataPropertyOrder:
+      "&":
+        - host
+    color: null
+    isPrivate: false
+    metaSortKey: 1717532926041
+    _type: environment
