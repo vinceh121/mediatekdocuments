@@ -40,6 +40,10 @@ class Dvd extends MyBaseModel
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    protected array $casts = [
+        'duree' => 'int'
+    ];
+
     public function aggregates(): self
     {
         return $this->select('dvd.*, document.*, rayon.libelle AS rayon, public.libelle AS public, genre.libelle AS genre, dvd.id AS id')
