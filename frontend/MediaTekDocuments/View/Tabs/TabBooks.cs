@@ -137,17 +137,17 @@ namespace MediaTekDocuments.View.Tabs
 
             if (this._genreCombo.ActiveId != null)
             {
-                filters.Add("genre", this._genreCombo.ActiveId);
+                filters.Add("idGenre", this._genreCombo.ActiveId);
             }
 
             if (this._publicCombo.ActiveId != null)
             {
-                filters.Add("public", this._publicCombo.ActiveId);
+                filters.Add("idPublic", this._publicCombo.ActiveId);
             }
 
             if (this._aisleCombo.ActiveId != null)
             {
-                filters.Add("aisle", this._aisleCombo.ActiveId);
+                filters.Add("idRayon", this._aisleCombo.ActiveId);
             }
 
             var books = await Access.GetInstance().Books().Get(filters);

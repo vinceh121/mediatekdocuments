@@ -9,23 +9,15 @@ using Newtonsoft.Json;
 
 namespace MediaTekDocuments.Dal
 {
-    public abstract class AbstractCrud<T> : ICrud<T>
+    public abstract class AbstractCrud<T>(string entity, Access access) : ICrud<T>
     {
-        protected readonly string _entity;
+        protected readonly string _entity = entity;
 
-        protected readonly Access _access;
-        protected readonly JsonSerializer _serializer;
-        protected readonly HttpClient _client;
+        protected readonly Access _access = access;
+        protected readonly JsonSerializer _serializer = access.GetSerializer();
+        protected readonly HttpClient _client = access.GetClient();
 
-        public AbstractCrud(string entity, Access access)
-        {
-            this._entity = entity;
-            this._access = access;
-            this._serializer = access.GetSerializer();
-            this._client = access.GetClient();
-        }
-
-        public async Task Create(T entity)
+		public async Task Create(T entity)
         {
             var body = JsonConvert.SerializeObject(entity, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
             var res = await this._client.PostAsync(this._entity, new StringContent(body, Access.jsonMimeType));
