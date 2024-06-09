@@ -43,6 +43,7 @@ namespace MediaTekDocuments.View
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 MessageDialog diag = new(null,
                                     0,
                                     MessageType.Error,
