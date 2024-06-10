@@ -130,7 +130,7 @@ namespace MediaTekDocuments.View.Tabs
 
 			if (this._titleSearch.Text.Length != 0)
 			{
-				filters.Add("title", this._titleSearch.Text);
+				filters.Add("titre", this._titleSearch.Text);
 			}
 
 			if (this._numberSearch.Text.Length != 0)
@@ -201,7 +201,7 @@ namespace MediaTekDocuments.View.Tabs
 
 		private void CreateDvd()
 		{
-			CreateBookDialog diag = new(this._program);
+			CreateDvdDialog diag = new(this._program);
 			diag.Destroyed += (_, _) => this.FillDvds();
 			diag.Run();
 		}
