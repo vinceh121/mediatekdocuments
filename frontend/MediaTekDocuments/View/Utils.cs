@@ -7,6 +7,17 @@ namespace MediaTekDocuments.View
 {
 	public static class Utils
 	{
+		public static string PeriodiciteName(string s)
+		{
+			return s switch
+			{
+				"MS" => "Mensuel",
+				"HB" => "Hebdomadaire",
+				"QT" => "Quotidien",
+				_ => null,
+			};
+		}
+
 		public static async void FillEnum<T>(ICrud<T> crud, params ComboBox[] cbxs) where T : Categorie
 		{
 			var data = await crud.Get();

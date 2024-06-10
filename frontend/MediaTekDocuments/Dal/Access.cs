@@ -94,6 +94,11 @@ namespace MediaTekDocuments.Dal
             return new SimpleCrud<Dvd>("dvds", this);
         }
 
+        public ICrud<Revue> Revues()
+        {
+            return new SimpleCrud<Revue>("revues", this);
+        }
+
         public ICrud<Public> Publics()
         {
             return new SimpleCrud<Public>("publics", this);

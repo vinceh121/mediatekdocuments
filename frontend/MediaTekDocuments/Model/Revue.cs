@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json;
+
 namespace MediaTekDocuments.Model
 {
     /// <summary>
@@ -8,7 +10,9 @@ namespace MediaTekDocuments.Model
         string idPublic, string lePublic, string idRayon, string rayon,
         string periodicite, int delaiMiseADispo) : Document(id, titre, image, idGenre, genre, idPublic, lePublic, idRayon, rayon)
     {
+        [JsonProperty("periodicite")]
         public string Periodicite { get; set; } = periodicite;
+        [JsonProperty("delaiMiseADispo")]
         public int DelaiMiseADispo { get; set; } = delaiMiseADispo;
     }
 }

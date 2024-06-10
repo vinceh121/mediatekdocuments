@@ -19,6 +19,7 @@ namespace MediaTekDocuments.View
 
         private readonly TabBooks _tabBooks;
         private readonly TabDvds _tabDvds;
+        private readonly TabRevue _tabRevues;
 
         public MainWindow(Program program, bool readOnly) : this(program, readOnly, new Builder("MainWindow.glade")) { }
 
@@ -33,6 +34,9 @@ namespace MediaTekDocuments.View
 
             this._tabDvds = new TabDvds(program, readOnly);
             this._notebook.AppendPage(this._tabDvds, new Label("DVDs"));
+
+            this._tabRevues = new TabRevue(program, readOnly);
+            this._notebook.AppendPage(this._tabRevues, new Label("Revues"));
 
             DeleteEvent += Window_DeleteEvent;
         }
