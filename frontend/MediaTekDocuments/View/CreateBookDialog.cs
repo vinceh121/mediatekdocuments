@@ -35,7 +35,7 @@ namespace MediaTekDocuments.View
             this.Application = program.GetApplication();
             builder.Autoconnect(this);
 
-            this._btnCancel.Clicked += (_, _) => Application.Quit();
+            this._btnCancel.Clicked += (_, _) => this.Destroy();
             this._btnCreate.Clicked += (_, _) => this.CreateBook();
 
             Utils.FillEnum(Access.GetInstance().Aisles(), this._comboAisle);
