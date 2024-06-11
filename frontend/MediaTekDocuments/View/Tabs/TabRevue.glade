@@ -25,9 +25,9 @@
   <object class="GtkListStore" id="liststore1">
     <columns>
       <!-- column-name id -->
-      <column type="gchar"/>
+      <column type="gchararray"/>
       <!-- column-name name -->
-      <column type="gchar"/>
+      <column type="gchararray"/>
     </columns>
     <data>
       <row>

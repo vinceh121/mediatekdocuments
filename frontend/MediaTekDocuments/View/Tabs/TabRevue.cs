@@ -202,7 +202,7 @@ namespace MediaTekDocuments.View.Tabs
 
 		private void CreateRevue()
 		{
-			CreateBookDialog diag = new(this._program);
+			CreateRevueDialog diag = new(this._program);
 			diag.Destroyed += (_, _) => this.FillRevues();
 			diag.Run();
 		}

@@ -38,7 +38,7 @@ namespace MediaTekDocuments.View
 			}
 		}
 
-		private static void SetComboboxTextRenderer(ComboBox cbx)
+		public static void SetComboboxTextRenderer(ComboBox cbx)
 		{
 			cbx.Clear();
 			CellRendererText txtRender = new();
