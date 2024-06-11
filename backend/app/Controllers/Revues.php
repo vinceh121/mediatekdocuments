@@ -62,4 +62,11 @@ class Revues extends MyResourceController
         model(Document::class)->insert($body);
         $this->model->insert($body);
     }
+
+    public function delete($id = null)
+    {
+        $this->model->delete($id);
+        model(Document::class)->delete($id);
+        return $this->respondDeleted();
+    }
 }
