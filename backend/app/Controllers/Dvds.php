@@ -19,7 +19,7 @@ class Dvds extends MyResourceController
     protected $modelName = Dvd::class;
     
     protected array $searchFields = [ 'realisateur', 'titre', 'synopsis' ];
-    protected array $fields = [ 'id', 'genre', 'public', 'aisle' ];
+    protected array $fields = [ 'id', 'genre', 'public', 'aisle', 'idRayon', 'idPublic', 'idGenre' ];
 
     public function update($id = null)
     {
