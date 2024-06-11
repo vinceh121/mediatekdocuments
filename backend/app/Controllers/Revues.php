@@ -59,14 +59,18 @@ class Revues extends MyResourceController
 
         log_message('info', sprintf('creating revue with id %s', $newId));
 
+        $this->model->db->transBegin();
         model(Document::class)->insert($body);
         $this->model->insert($body);
+        $this->model->db->transComplete();
     }
 
     public function delete($id = null)
     {
+        $this->model->db->transBegin();
         $this->model->delete($id);
         model(Document::class)->delete($id);
+        $this->model->db->transComplete();
         return $this->respondDeleted();
     }
 }
